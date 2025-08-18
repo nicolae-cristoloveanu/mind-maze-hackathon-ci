@@ -211,8 +211,10 @@ function drawMaze(maze, solution = null) {
 /**
  * Function to position the player in the maze
  * @param {string} direction : direction to move the current player to
+ * @param {boolean} openDoor : true - open encountered door"; false - return status "checkKey"
  */
-function positionPlayer(direction) {
+function positionPlayer(direction, openDoor = false) {
+  let status = "success";
   const possibleDirections = ["UP", "RIGHT", "DOWN", "LEFT"];
   if (possibleDirections.includes(direction)) {
     console.log(`DEBUG: Move Player:${direction}`);
@@ -257,20 +259,37 @@ function positionPlayer(direction) {
       );
       // Only move if target cell exists
       if (nextPlayerCell) {
-        // Move player to new position
-        currentPlayerCell.classList.remove("player-position");
-        currentPlayerCell.innerHTML = "";
+        if (nextPlayerCell.classList.contains("maze-door") && !openDoor) {
+          // Check if next position has Trivia door and if it should be opened
+          status = "checkKey";
+        } else {
+          // Move player to new position
+          currentPlayerCell.classList.remove("player-position");
+          currentPlayerCell.innerHTML = "";
 
-        nextPlayerCell.classList.add("player-position");
-        const player = document.createElement("div");
-        player.classList.add("player");
-        nextPlayerCell.appendChild(player);
-        console.log(`DEBUG: Player moved to position =>${[nextRow, nextCol]}`);
+          nextPlayerCell.classList.add("player-position");
+          if (nextPlayerCell.classList.contains("maze-door")) {
+            nextPlayerCell.classList.remove("maze-door");
+            nextPlayerCell.classList.add("maze-door-open");
+          }
+          const player = document.createElement("div");
+          player.classList.add("player");
+          nextPlayerCell.appendChild(player);
+          console.log(
+            `DEBUG: Player moved to position =>${[nextRow, nextCol]}`
+          );
+        }
       }
     }
+    return status;
   } else {
     throw `Direction not allowed: ${direction}`;
   }
+}
+
+// TODO: Add Trivia modal; should return boolean to open the door(true if correct answer or skipped), false(if incorrect)
+function askTrivia() {
+  console.log(`DEBUG: Open trivia modal`);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -278,6 +297,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const mazeSize = 15;
   const numDoors = 10;
 
+  // Key bindings for keyboard control
+  const keyDirectionMap = {
+    ArrowUp: "UP",
+    ArrowRight: "RIGHT",
+    ArrowDown: "DOWN",
+    ArrowLeft: "LEFT",
+  };
+
+  // Game setup
   const maze = generateMazeMap(mazeSize, mazeSize);
   console.log("DEBUG:maze=>\n");
   console.log(maze);
@@ -298,18 +326,63 @@ document.addEventListener("DOMContentLoaded", function () {
   //   drawMaze(maze, solution);
   drawMaze(maze);
 
+  // Custom Events
+  const checkKeyEvent = new CustomEvent("checkKey", {
+    detail: {
+      lastKeyPressed: "",
+      status: "",
+    },
+  });
+
   // Add event listener for Key presses
   document.addEventListener("keydown", (event) => {
-    const directionMap = {
-      ArrowUp: "UP",
-      ArrowRight: "RIGHT",
-      ArrowDown: "DOWN",
-      ArrowLeft: "LEFT",
-    };
-    if (Object.keys(directionMap).includes(event.key)) {
+    if (Object.keys(keyDirectionMap).includes(event.key)) {
       event.preventDefault(); // prevent default scroll behavior for arrow keys
       console.log(`DEBUG: Key pressed=>${event.key}`);
-      positionPlayer(directionMap[event.key]);
+      if (positionPlayer(keyDirectionMap[event.key]) === "checkKey") {
+        checkKeyEvent.detail.lastKeyPressed = event.key;
+        document.dispatchEvent(checkKeyEvent);
+      }
     }
+  });
+
+  // Add event listener for custom Events
+  document.addEventListener("checkKey", (event) => {
+    if (!event.detail.status) {
+      // If status hasn't been set trigger Trivia modal
+      console.log(
+        `DEBUG: Door detected. Ask Trivia to pass.\n Last Key Pressed => ${event.detail.lastKeyPressed}`
+      );
+      askTrivia();
+    } else if (event.detail.status === "open") {
+      positionPlayer(keyDirectionMap[event.detail.lastKeyPressed], true);
+      console.log(`DEBUG:Correct! Door opened!`);
+      // Clear Event details
+      checkKeyEvent.detail.lastKeyPressed = "";
+      checkKeyEvent.detail.status = "";
+    }
+  });
+
+  // Add event listeners for buttons
+  buttons = document.querySelectorAll("button");
+  buttons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      // Functionality based on button clicked
+      if (event.currentTarget.getAttribute("data-type") === "trivia-correct") {
+        checkKeyEvent.detail.status = "open";
+        document.dispatchEvent(checkKeyEvent);
+      } else if (event.currentTarget.getAttribute("data-type") === "trivia-incorrect") {
+        console.log(`DEBUG: Incorrect Answer.\nGame End!`);
+        // Clear Event details
+        checkKeyEvent.detail.lastKeyPressed = "";
+        checkKeyEvent.detail.status = "";
+        // TODO: Need to trigger current game End
+      } else if (event.currentTarget.getAttribute("data-type") === "masterkey") {
+        // TODO: add logic to decrement master key count
+        console.log(`DEBUG: Master Key used - X master keys left`);
+        checkKeyEvent.detail.status = "open";
+        document.dispatchEvent(checkKeyEvent);
+      }
+    });
   });
 });
