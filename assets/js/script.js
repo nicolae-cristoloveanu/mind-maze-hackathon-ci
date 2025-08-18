@@ -156,7 +156,7 @@ function placeDoors(path, numDoors) {
  * Render the maze into HTML element
  * @param {object} maze: Object of type returned from generateMazeMap
  */
-function drawMaze(maze, solution=null) {
+function drawMaze(maze, solution = null) {
   const mazeSize = maze["cells"].length;
 
   const mazeArea = document.querySelector("#maze-area");
@@ -208,6 +208,71 @@ function drawMaze(maze, solution=null) {
   }
 }
 
+/**
+ * Function to position the player in the maze
+ * @param {string} direction : direction to move the current player to
+ */
+function positionPlayer(direction) {
+  const possibleDirections = ["UP", "RIGHT", "DOWN", "LEFT"];
+  if (possibleDirections.includes(direction)) {
+    console.log(`DEBUG: Move Player:${direction}`);
+
+    const currentPlayerCell = document.querySelector(
+      ".maze-cell.player-position"
+    );
+
+    // Get the row and col number from attributes
+    let currentRow = parseInt(currentPlayerCell.getAttribute("data-pos-row"));
+    let currentCol = parseInt(currentPlayerCell.getAttribute("data-pos-col"));
+    console.log(`DEBUG: Current Player position =>${[currentRow, currentCol]}`);
+
+    // Calculate next position based on direction
+    let nextRow = currentRow;
+    let nextCol = currentCol;
+    let wallToCheck = "";
+
+    switch (direction) {
+      case "UP":
+        nextRow = currentRow - 1;
+        wallToCheck = "wall-top";
+        break;
+      case "RIGHT":
+        nextCol = currentCol + 1;
+        wallToCheck = "wall-right";
+        break;
+      case "DOWN":
+        nextRow = currentRow + 1;
+        wallToCheck = "wall-bottom";
+        break;
+      case "LEFT":
+        nextCol = currentCol - 1;
+        wallToCheck = "wall-left";
+        break;
+    }
+
+    // Check if move is valid and there's no wall
+    if (!currentPlayerCell.classList.contains(wallToCheck)) {
+      const nextPlayerCell = document.querySelector(
+        `.maze-cell[data-pos-row="${nextRow}"][data-pos-col="${nextCol}"]`
+      );
+      // Only move if target cell exists
+      if (nextPlayerCell) {
+        // Move player to new position
+        currentPlayerCell.classList.remove("player-position");
+        currentPlayerCell.innerHTML = "";
+
+        nextPlayerCell.classList.add("player-position");
+        const player = document.createElement("div");
+        player.classList.add("player");
+        nextPlayerCell.appendChild(player);
+        console.log(`Player moved to position =>${[nextRow, nextCol]}`);
+      }
+    }
+  } else {
+    throw `Direction not allowed: ${direction}`;
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   // Game difficulty settings
   const mazeSize = 15;
@@ -230,5 +295,22 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Render maze in HTML
-  drawMaze(maze, solution);
+  //   drawMaze(maze, solution);
+  drawMaze(maze);
+
+  // Add event listener for Key presses
+  document.addEventListener("keydown", (event) => {
+    const directionMap = {
+      ArrowUp: "UP",
+      ArrowRight: "RIGHT",
+      ArrowDown: "DOWN",
+      ArrowLeft: "LEFT",
+    };
+    if (Object.keys(directionMap).includes(event.key)) {
+      event.preventDefault(); // prevent default scroll behavior for arrow keys
+      console.log("Key pressed=>");
+      console.log(event.key);
+      positionPlayer(directionMap[event.key]);
+    }
+  });
 });
