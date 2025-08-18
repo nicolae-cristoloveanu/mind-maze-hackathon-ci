@@ -265,7 +265,7 @@ function positionPlayer(direction) {
         const player = document.createElement("div");
         player.classList.add("player");
         nextPlayerCell.appendChild(player);
-        console.log(`Player moved to position =>${[nextRow, nextCol]}`);
+        console.log(`DEBUG: Player moved to position =>${[nextRow, nextCol]}`);
       }
     }
   } else {
@@ -308,8 +308,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
     if (Object.keys(directionMap).includes(event.key)) {
       event.preventDefault(); // prevent default scroll behavior for arrow keys
-      console.log("Key pressed=>");
-      console.log(event.key);
+      console.log(`DEBUG: Key pressed=>${event.key}`);
       positionPlayer(directionMap[event.key]);
     }
   });
