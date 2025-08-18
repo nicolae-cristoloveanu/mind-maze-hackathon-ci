@@ -1,8 +1,6 @@
 /* Google Fonts import */
 @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-
-
 :root {
 
     /* Fonts */
@@ -27,12 +25,15 @@
     --border-light-blue: rgba(136, 217, 230, 0.3);
     --border-light-purple: rgba(139, 139, 174, 0.3);
     --border-very-light: rgba(197, 255, 253, 0.15);
-
-
+    /* Maze variables */
+    --wall-style: 3px solid black;
+    --maze-cell-width: 30px;
 }
 
-
 /* Global Styles */
+*{
+    box-sizing: border-box;
+}
 
 body {
     font-family: var(--primary-font);
@@ -93,9 +94,66 @@ p {
     font-weight: 400;
     line-height: 1.6;
 }
+/* Maze global classes */
+.maze-row{
+    display: flex;
+    justify-content: center;
+}
+
+.maze-cell{
+    width: var(--maze-cell-width);
+    height: var(--maze-cell-width);
+}
+
+.maze-path{
+    background-color: palevioletred;
+}
+
+.maze-solution{
+    background-color: lawngreen;
+}
+
+.maze-door{
+    background-color: brown;
+}
+
+.wall-top{
+    border-top: var(--wall-style);
+}
+
+.wall-right{
+    border-right: var(--wall-style);
+}
+
+.wall-bottom{
+    border-bottom: var(--wall-style);
+}
+
+.wall-left{
+    border-left: var(--wall-style);
+}
+
+.player-position{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: blue; */
+}
+
+.player{
+    background-color: blue;
+    width:80%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+
+}
+
+#maze-area{
+    border: 2px dotted green;
+    width: calc(attr(data-maze-size) * var(var(--maze-cell-width)));
+}
 
 /* Navbar */
-
 #navbar {
     background-color: #F78E69;
     position: sticky;
