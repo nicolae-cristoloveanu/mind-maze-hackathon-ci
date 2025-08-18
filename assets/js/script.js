@@ -290,6 +290,8 @@ function positionPlayer(direction, openDoor = false) {
 // TODO: Add Trivia modal; should return boolean to open the door(true if correct answer or skipped), false(if incorrect)
 function askTrivia() {
   console.log(`DEBUG: Open trivia modal`);
+  const triviaModal = new bootstrap.Modal(document.querySelector("#trivia-modal"));
+  triviaModal.show();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
