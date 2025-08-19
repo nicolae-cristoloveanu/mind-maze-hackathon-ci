@@ -46,7 +46,6 @@ h1,
 h2,
 h3 {
     font-family: var(--secondary-font);
-    color: var(--primary-color);
     font-weight: 700;
 }
 
@@ -54,6 +53,7 @@ h1 {
     font-size: 2.5rem;
     line-height: 1.2;
     text-transform: uppercase;
+    color: var(--primary-color);
 }
 
 h2 {
@@ -157,6 +157,79 @@ p {
     width: calc(attr(data-maze-size) * var(var(--maze-cell-width)));
 }
 
+.section-content {
+    /* padding: 6rem 0; */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle{
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+/* Puzzle section */
+/* #game-section, #maze-exploration {
+    transition: background-color 0.3s ease;
+} */
+
+#game-section > .container{
+    border: 2px dotted blue;
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#game-section .row {
+    height: 100%;
+}
+
+#game-section .row > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#game-section #section-heading {
+    height: 10%;
+    border: 2px dotted coral;
+}
+
+#game-section #game-area {
+    height: 50%;
+    border: 2px dotted coral;
+}
+
+#game-section #game-controls{
+    height:25%;
+    border: 2px dotted coral;
+}
+
+#game-section #game-master-keys {
+    height:15%;
+    border: 2px dotted coral;
+}
+
+#game-section #game-stats {
+    height: 15%;
+    border: 2px dotted coral;
+}
+
+/* #game-section:hover, #maze-exploration:hover {
+    background-color: var(--secondary-color);
+} */
+
+#game-controls .btn {
+    width: min(7vw);
+}
+
+.text-content-section .section-heading {
+    margin-bottom: 2rem;
+}
+
+
 /* Navbar */
 #navbar {
     background-color: #F78E69;
@@ -206,8 +279,6 @@ p {
     border-color: var(--text-color);
 
 }
-
-
 
 /* Feature Section */
 
@@ -441,23 +512,6 @@ p {
 
 
 
-/* Additional styles for centered sections */
-.text-content-section {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-}
-
-#puzzle-challenge, #maze-exploration {
-    transition: background-color 0.3s ease;
-}
-
-#puzzle-challenge:hover, #maze-exploration:hover {
-    background-color: var(--secondary-color);
-}
-
-.text-content-section .section-heading {
-    margin-bottom: 2rem;
-}
 
 
 /* Media queries */
