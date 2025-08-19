@@ -139,11 +139,14 @@ function placeDoors(path, numDoors) {
   let doorPositions = [];
   for (let count = 0; count < numDoors; count++) {
     let index = Math.floor(Math.random() * path.length);
+    // Repeat random index if the index has already been selected of if index is start and end
     while (
       doorPositions.some(
         (position) =>
           position[0] === path[index][0] && position[1] === path[index][1]
-      )
+      ) ||
+      index === 0 ||
+      index === path.length - 1
     ) {
       index = Math.floor(Math.random() * path.length);
     }
@@ -290,7 +293,9 @@ function positionPlayer(direction, openDoor = false) {
 // TODO: Add Trivia modal; should return boolean to open the door(true if correct answer or skipped), false(if incorrect)
 function askTrivia() {
   console.log(`DEBUG: Open trivia modal`);
-  const triviaModal = new bootstrap.Modal(document.querySelector("#trivia-modal"));
+  const triviaModal = new bootstrap.Modal(
+    document.querySelector("#trivia-modal")
+  );
   triviaModal.show();
 }
 
@@ -298,6 +303,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // Game difficulty settings
   const mazeSize = 15;
   const numDoors = 10;
+  
+  // Add maze dimension as style property to HTML element
+  // CSS then uses this to responsively scale the maze cell width depending 
+  // on viewport width and height
+  document.documentElement.style.setProperty('--maze-dimension',mazeSize);
 
   // Key bindings for keyboard control
   const keyDirectionMap = {
@@ -397,17 +407,31 @@ document.addEventListener("DOMContentLoaded", function () {
       if (event.currentTarget.getAttribute("data-type") === "trivia-correct") {
         checkKeyEvent.detail.status = "open";
         document.dispatchEvent(checkKeyEvent);
-      } else if (event.currentTarget.getAttribute("data-type") === "trivia-incorrect") {
+      } else if (
+        event.currentTarget.getAttribute("data-type") === "trivia-incorrect"
+      ) {
         console.log(`DEBUG: Incorrect Answer.\nGame End!`);
         // Clear Event details
         checkKeyEvent.detail.lastKeyPressed = "";
         checkKeyEvent.detail.status = "";
         // TODO: Need to trigger current game End
-      } else if (event.currentTarget.getAttribute("data-type") === "masterkey") {
+      } else if (
+        event.currentTarget.getAttribute("data-type") === "masterkey"
+      ) {
         // TODO: add logic to decrement master key count
         console.log(`DEBUG: Master Key used - X master keys left`);
         checkKeyEvent.detail.status = "open";
         document.dispatchEvent(checkKeyEvent);
+      } else if (
+        event.currentTarget.getAttribute("data-type") === "direction-control"
+      ) {
+        const keyPressed = event.currentTarget.getAttribute("data-direction");
+        const direction = keyDirectionMap[keyPressed];
+        console.log(`DEBUG: Button pressed=>${direction}`);
+        if (positionPlayer(direction) === "checkKey") {
+          checkKeyEvent.detail.lastKeyPressed = keyPressed;
+          document.dispatchEvent(checkKeyEvent);
+        }
       }
     });
   });
