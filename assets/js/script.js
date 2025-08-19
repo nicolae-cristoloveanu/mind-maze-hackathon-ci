@@ -334,6 +334,40 @@ document.addEventListener("DOMContentLoaded", function () {
     maze["cells"][position[0]][position[1]]["door"] = true;
   });
 
+  // Game state object
+  const gameState = {
+    numMasterKeys: 5,
+    numQuestions: 0,
+    numCorrect: 0,
+    numIncorrect: 0,
+    useMasterKey: function() {
+      if(this.numMasterKeys > 0){
+        this.numMasterKeys--;
+      }
+    },
+    areKeysLeft: function() {
+      return (this.numMasterKeys)? true: false;
+    },
+    incrementCorrect: function() {
+      this.numQuestions++;
+      this.Correct++;
+    },
+    incrementInCorrect: function() {
+      this.numQuestions++;
+      this.numIncorrect++;
+    },
+    returnGameStatistics: function() {
+      return {
+        questions: this.numQuestions,
+        correct: this.numCorrect,
+        incorrect: this.numIncorrect,
+      }
+    },
+    returnKeysLeft: function(){
+      return this.numMasterKeys;
+    },
+  }
+
   // Render maze in HTML
   //   drawMaze(maze, solution);
   drawMaze(maze);
@@ -405,11 +439,13 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", (event) => {
       // Functionality based on button clicked
       if (event.currentTarget.getAttribute("data-type") === "trivia-correct") {
+        gameState.incrementCorrect();
         checkKeyEvent.detail.status = "open";
         document.dispatchEvent(checkKeyEvent);
       } else if (
         event.currentTarget.getAttribute("data-type") === "trivia-incorrect"
       ) {
+        gameState.incrementInCorrect();
         console.log(`DEBUG: Incorrect Answer.\nGame End!`);
         // Clear Event details
         checkKeyEvent.detail.lastKeyPressed = "";
@@ -419,7 +455,8 @@ document.addEventListener("DOMContentLoaded", function () {
         event.currentTarget.getAttribute("data-type") === "masterkey"
       ) {
         // TODO: add logic to decrement master key count
-        console.log(`DEBUG: Master Key used - X master keys left`);
+        gameState.useMasterKey();
+        console.log(`DEBUG: Master Key used - ${gameState.returnKeysLeft()} master keys left`);
         checkKeyEvent.detail.status = "open";
         document.dispatchEvent(checkKeyEvent);
       } else if (
