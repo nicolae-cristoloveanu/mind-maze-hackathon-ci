@@ -19,7 +19,10 @@
     /* dark teal */
     --text-color: #5D675B;
     /* dark teal */
-    --highlight-color-light-translucent: rgba(241, 187, 135, 0.7);
+
+    --primary-color-translucent: rgba(247,239,153,0.5);
+    --secondary-color-translucent: rgba(171,225,136,0.5);
+    --highlight-color-light-translucent: rgba(241, 187, 135, 0.65);
 
     /* Light border colors for sections */
     --border-light-cyan: rgba(197, 255, 253, 0.3);
@@ -146,7 +149,6 @@ p {
 
 }
 
-
 .section-content {
     /* padding: 6rem 0; */
     height: 100vh;
@@ -191,12 +193,12 @@ p {
 
 #game-section #section-heading {
     height: 10%;
-    border: 2px dotted coral;
+    /* border: 2px dotted coral; */
 }
 
 #game-section #game-area {
     height: 50%;
-    border: 2px dotted coral;
+    /* border: 2px dotted coral; */
 }
 
 #maze-area {
@@ -206,23 +208,30 @@ p {
     backdrop-filter: blur(2px);
 }
 
-#game-section #game-controls {
-    height: 25%;
-    border: 2px dotted coral;
-}
-
-#game-section #game-master-keys {
-    height: 15%;
-    border: 2px dotted coral;
-}
-
-#game-section #game-stats {
-    height: 15%;
-    border: 2px dotted coral;
-}
-
 #game-controls {
+    height: 22%;
+    border: 1px solid coral;
+    margin: 0.5rem 0;
+    border-radius: 0.5rem;
+    /* background-color: var(--highlight-color-light-translucent); */
     position: relative;
+}
+
+#game-master-keys {
+    height: 15%;
+    border: 2px solid var(--primary-color);
+    background-color: var(--primary-color-translucent);
+    backdrop-filter: blur(1px);
+    border-bottom-left-radius: 0.5rem;
+}
+
+#game-stats {
+    height: 15%;
+    border: 2px solid var(--primary-color);
+    background-color: var(--primary-color-translucent);
+    backdrop-filter: blur(1px);
+    border-bottom-right-radius: 0.5rem;
+
 }
 
 #game-controls .btn {
@@ -260,12 +269,6 @@ p {
     display: flex;
     flex-direction: column;
 }
-
-#game-master-keys>p {
-    display: block;
-    width: 100%;
-}
-
 
 /* Navbar */
 #navbar {
@@ -575,6 +578,7 @@ p {
         position: absolute;
         top: 42.5%;
         width: 20%;
+        border-radius: 1rem;
     }
 
     #game-master-keys {
