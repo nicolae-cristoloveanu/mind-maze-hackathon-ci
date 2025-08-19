@@ -205,9 +205,33 @@ p {
     background-color: var(--secondary-color);
 } */
 
+#game-controls {
+    position: relative;
+}
+
 #game-controls .btn {
-    width: 36px;
+    --btn-height: 30%; 
+    height: var(--btn-height);
     text-align: center;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+}
+
+#game-controls .btn[data-direction="ArrowLeft"]{
+    left: 30%;
+}
+
+#game-controls .btn[data-direction="ArrowRight"]{
+    right: 30%;
+}
+
+#game-controls .btn[data-direction="ArrowUp"]{
+    top: 5%;
+}
+
+#game-controls .btn[data-direction="ArrowDown"]{
+    bottom: 5%;
 }
 
 .text-content-section .section-heading {
