@@ -139,11 +139,14 @@ function placeDoors(path, numDoors) {
   let doorPositions = [];
   for (let count = 0; count < numDoors; count++) {
     let index = Math.floor(Math.random() * path.length);
-    while (
+    // Repeat random index if the index has already been selected of if index is start and end
+    while ((
       doorPositions.some(
         (position) =>
           position[0] === path[index][0] && position[1] === path[index][1]
-      )
+      ) 
+      || index === 0 
+      || index === (path.length - 1))
     ) {
       index = Math.floor(Math.random() * path.length);
     }
