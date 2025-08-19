@@ -27,11 +27,11 @@
     --border-very-light: rgba(197, 255, 253, 0.15);
     /* Maze variables */
     --wall-style: 2px solid black;
-    --maze-cell-width: calc(min(90vw,0.75*50vh)/var(--maze-dimension));
+    --maze-cell-width: calc(min(90vw, 0.75*50vh)/var(--maze-dimension));
 }
 
 /* Global Styles */
-*{
+* {
     box-sizing: border-box;
 }
 
@@ -78,65 +78,70 @@ p {
     font-weight: 400;
     line-height: 1.6;
 }
+
 /* Maze global classes */
-.maze-row{
+.maze-row {
     display: flex;
     justify-content: center;
 }
 
-.maze-cell{
+.maze-cell {
     width: var(--maze-cell-width);
     height: var(--maze-cell-width);
 }
 
-.maze-path{
+.maze-path {
     background-color: palevioletred;
 }
 
-.maze-solution{
+.maze-solution {
     background-color: lawngreen;
 }
 
-.maze-door{
+.maze-door {
     background-color: brown;
 }
 
-.maze-door-open{
+.maze-door-open {
     background-color: lightcoral;
 }
 
-.wall-top{
+.maze-end {
+    background: url(../images/checkered-flag.png) no-repeat center/cover;
+}
+
+.wall-top {
     border-top: var(--wall-style);
 }
 
-.wall-right{
+.wall-right {
     border-right: var(--wall-style);
 }
 
-.wall-bottom{
+.wall-bottom {
     border-bottom: var(--wall-style);
 }
 
-.wall-left{
+.wall-left {
     border-left: var(--wall-style);
 }
 
-.player-position{
+.player-position {
     display: flex;
     justify-content: center;
     align-items: center;
     /* background-color: blue; */
 }
 
-.player{
+.player {
     background-color: blue;
-    width:80%;
+    width: 80%;
     aspect-ratio: 1;
     border-radius: 50%;
 
 }
 
-#maze-area{
+#maze-area {
     border: 2px dotted green;
     width: calc(attr(data-maze-size) * var(var(--maze-cell-width)));
 }
@@ -149,16 +154,17 @@ p {
     align-items: center;
 }
 
-.circle{
+.circle {
     aspect-ratio: 1;
     border-radius: 50%;
 }
+
 /* Puzzle section */
 /* #game-section, #maze-exploration {
     transition: background-color 0.3s ease;
 } */
 
-#game-section > .container{
+#game-section>.container {
     border: 2px dotted blue;
     height: 80%;
     display: flex;
@@ -170,7 +176,7 @@ p {
     height: 100%;
 }
 
-#game-section .row > div {
+#game-section .row>div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -186,13 +192,13 @@ p {
     border: 2px dotted coral;
 }
 
-#game-section #game-controls{
-    height:25%;
+#game-section #game-controls {
+    height: 25%;
     border: 2px dotted coral;
 }
 
 #game-section #game-master-keys {
-    height:15%;
+    height: 15%;
     border: 2px dotted coral;
 }
 
@@ -206,7 +212,7 @@ p {
 }
 
 #game-controls .btn {
-    --btn-height: 30%; 
+    --btn-height: 30%;
     height: var(--btn-height);
     text-align: center;
     padding: 0;
@@ -214,33 +220,34 @@ p {
     position: absolute;
 }
 
-#game-controls .btn[data-direction="ArrowLeft"]{
+#game-controls .btn[data-direction="ArrowLeft"] {
     left: 30%;
 }
 
-#game-controls .btn[data-direction="ArrowRight"]{
+#game-controls .btn[data-direction="ArrowRight"] {
     right: 30%;
 }
 
-#game-controls .btn[data-direction="ArrowUp"]{
+#game-controls .btn[data-direction="ArrowUp"] {
     top: 5%;
 }
 
-#game-controls .btn[data-direction="ArrowDown"]{
+#game-controls .btn[data-direction="ArrowDown"] {
     bottom: 5%;
 }
 
 /* Master Key Display */
-.fa-key.used-key{
+.fa-key.used-key {
     opacity: 30%;
 }
 
 #game-stats,
-#game-master-keys{
+#game-master-keys {
     display: flex;
     flex-direction: column;
 }
-#game-master-keys > p {
+
+#game-master-keys>p {
     display: block;
     width: 100%;
 }
@@ -538,11 +545,11 @@ p {
         padding-top: 2rem;
         padding-bottom: 2rem;
     }
-    
+
     .text-content-section .section-heading {
         font-size: 1.5rem;
     }
-    
+
     .feature-item h4 {
         font-size: 1.2rem;
     }
@@ -550,33 +557,34 @@ p {
 
 /* Small Devices (phones and small tablets, less than 768px) */
 @media (max-width: 767.98px) {
+
     /* Text content section styles */
     .text-content-section {
         padding-top: 2.5rem;
         padding-bottom: 2.5rem;
     }
-    
+
     .text-content-section .section-heading {
         font-size: 1.75rem;
     }
-    
+
     .text-content-section .lead {
         font-size: 1.1rem;
     }
-    
+
     /* Feature grid styles */
     .feature-cube {
         margin-bottom: 1.5rem;
     }
-    
+
     .feature-grid-row {
         margin-bottom: 0;
     }
-    
+
     .feature-item {
         padding: 1.5rem;
     }
-    
+
     .butterfly-icon {
         width: 60px;
         height: 60px;
@@ -588,11 +596,11 @@ p {
     .feature-item {
         padding: 1.75rem;
     }
-    
+
     .feature-text {
         font-size: 1rem;
     }
-    
+
     .text-content-section {
         padding: 3.5rem 1.5rem;
     }
@@ -603,7 +611,7 @@ p {
     .text-content-section {
         padding: 4.5rem 2rem;
     }
-    
+
     .feature-item {
         padding: 2rem;
     }
@@ -614,7 +622,7 @@ p {
     .text-content-section {
         padding: 5rem 2.5rem;
     }
-    
+
     .feature-grid-row {
         margin-bottom: 2.5rem;
     }

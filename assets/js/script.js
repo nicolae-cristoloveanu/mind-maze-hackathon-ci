@@ -201,6 +201,10 @@ function drawMaze(maze, solution = null) {
         player.classList.add("player");
         mazeCell.appendChild(player);
       }
+      // Add class for maze end
+      if (row === mazeSize - 1 && col === mazeSize - 1) {
+        mazeCell.classList.add("maze-end");
+      }
       // Add position attribute to each cell
       mazeCell.setAttribute("data-pos-row", row);
       mazeCell.setAttribute("data-pos-col", col);
@@ -271,10 +275,15 @@ function positionPlayer(direction, openDoor = false) {
           currentPlayerCell.innerHTML = "";
 
           nextPlayerCell.classList.add("player-position");
+          // Add open door style if maze door present
           if (nextPlayerCell.classList.contains("maze-door")) {
             nextPlayerCell.classList.remove("maze-door");
             nextPlayerCell.classList.add("maze-door-open");
           }
+          if (nextPlayerCell.classList.contains("maze-end")) {
+            status = "finished";
+          }
+
           const player = document.createElement("div");
           player.classList.add("player");
           nextPlayerCell.appendChild(player);
@@ -301,7 +310,7 @@ function askTrivia() {
 
 /**
  * Function to update the Heads Up Display
- * @param {object} gameState 
+ * @param {object} gameState
  */
 function updateHeadsUpDisplay(gameState) {
   const masterKeyArea = document.querySelector(
@@ -333,6 +342,25 @@ function updateHeadsUpDisplay(gameState) {
   }/${gameState.returnGameStatistics().questions}`;
 }
 
+function gameEnd(gameState) {
+  console.log(`DEBUG: Open Game End modal`);
+  const gameEndModal = new bootstrap.Modal(
+    document.querySelector("#game-end-modal")
+  );
+  if (gameState.gameOverStatus === "gameWon") {
+    document.querySelector("#game-end-modal .modal-title").innerHTML =
+      '<i class="fa-solid fa-graduation-cap"></i>Congratulations!!!';
+    document.querySelector("#game-end-modal .modal-body>p").innerHTML ='You completed the mission!!!';
+  } else if (gameState.gameOverStatus === "gameLost") {
+    document.querySelector("#game-end-modal .modal-title").innerHTML =
+      '<i class="fa-solid fa-circle-exclamation"></i>Commiserations!!!';
+    document.querySelector("#game-end-modal .modal-body>p").innerHTML ='You are locked. Thou shall not pass!!!';
+  }
+  gameEndModal.show();
+
+  gameState.reset();
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   // Game difficulty settings
   const mazeSize = 15;
@@ -352,25 +380,10 @@ document.addEventListener("DOMContentLoaded", function () {
     ArrowLeft: "LEFT",
   };
 
-  // Game setup
-  const maze = generateMazeMap(mazeSize, mazeSize);
-  console.log("DEBUG:maze=>\n");
-  console.log(maze);
-
-  const solution = findSolutionMaze(maze["cells"]);
-  console.log("DEBUG:solution=>\n");
-  console.log(solution);
-
-  const doorPositions = placeDoors(solution, numDoors);
-  console.log("DEBUG:doorPositions=>\n");
-  console.log(doorPositions);
-  // Update maze to insert doors
-  doorPositions.forEach((position) => {
-    maze["cells"][position[0]][position[1]]["door"] = true;
-  });
-
   // Game state object
   const gameState = {
+    gameOver: false,
+    gameOverStatus: "",
     totalKeysAvailable: 0,
     numMasterKeys: 0,
     numQuestions: 0,
@@ -379,6 +392,15 @@ document.addEventListener("DOMContentLoaded", function () {
     initializeKeys: function (keys) {
       this.totalKeysAvailable = keys;
       this.numMasterKeys = keys;
+    },
+    reset: function () {
+      this.gameOver = false;
+      this.gameOverStatus = "";
+      this.totalKeysAvailable = 0;
+      this.numMasterKeys = 0;
+      this.numQuestions = 0;
+      this.numCorrect = 0;
+      this.numSkipped = 0;
     },
     useMasterKey: function () {
       if (this.numMasterKeys > 0) {
@@ -406,6 +428,23 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   };
 
+  // Game setup
+  const maze = generateMazeMap(mazeSize, mazeSize);
+  console.log("DEBUG:maze=>\n");
+  console.log(maze);
+
+  const solution = findSolutionMaze(maze["cells"]);
+  console.log("DEBUG:solution=>\n");
+  console.log(solution);
+
+  const doorPositions = placeDoors(solution, numDoors);
+  console.log("DEBUG:doorPositions=>\n");
+  console.log(doorPositions);
+  // Update maze to insert doors
+  doorPositions.forEach((position) => {
+    maze["cells"][position[0]][position[1]]["door"] = true;
+  });
+
   // Initialize number of Keys for the game
   gameState.initializeKeys(numKeys);
   updateHeadsUpDisplay(gameState);
@@ -427,9 +466,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (Object.keys(keyDirectionMap).includes(event.key)) {
       event.preventDefault(); // prevent default scroll behavior for arrow keys
       console.log(`DEBUG: Key pressed=>${event.key}`);
-      if (positionPlayer(keyDirectionMap[event.key]) === "checkKey") {
+      const status = positionPlayer(keyDirectionMap[event.key]);
+      if (status === "checkKey") {
         checkKeyEvent.detail.lastKeyPressed = event.key;
         document.dispatchEvent(checkKeyEvent);
+      } else if (status === "finished") {
+        gameState.gameOver = true;
+        gameState.gameOverStatus = "gameWon";
+        gameEnd(gameState);
       }
     }
   });
@@ -493,7 +537,10 @@ document.addEventListener("DOMContentLoaded", function () {
         // Clear Event details
         checkKeyEvent.detail.lastKeyPressed = "";
         checkKeyEvent.detail.status = "";
-        // TODO: Need to trigger current game End
+        // trigger current game End
+        gameState.gameOver = true;
+        gameState.gameOverStatus = "gameLost";
+        gameEnd(gameState);
       } else if (
         event.currentTarget.getAttribute("data-type") === "masterkey"
       ) {
@@ -511,9 +558,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const keyPressed = event.currentTarget.getAttribute("data-direction");
         const direction = keyDirectionMap[keyPressed];
         console.log(`DEBUG: Button pressed=>${direction}`);
-        if (positionPlayer(direction) === "checkKey") {
+        const status = positionPlayer(direction);
+        if (status === "checkKey") {
           checkKeyEvent.detail.lastKeyPressed = keyPressed;
           document.dispatchEvent(checkKeyEvent);
+        } else if (status === "finished") {
+          gameState.gameOver = true;
+          gameState.gameOverStatus = "gameWon";
+          gameEnd(gameState);
         }
       }
     });
