@@ -196,6 +196,7 @@ function drawMaze(maze, solution = null) {
         mazeCell.classList.add("maze-door");
       }
       if (row === 0 && col === 0) {
+        mazeCell.classList.add("maze-start");
         mazeCell.classList.add("player-position");
         const player = document.createElement("div");
         player.classList.add("player");
@@ -342,6 +343,10 @@ function updateHeadsUpDisplay(gameState) {
   }/${gameState.returnGameStatistics().questions}`;
 }
 
+/**
+ * Function to handle game end
+ * @param {object} gameState 
+ */
 function gameEnd(gameState) {
   console.log(`DEBUG: Open Game End modal`);
   const gameEndModal = new bootstrap.Modal(

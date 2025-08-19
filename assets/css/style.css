@@ -105,6 +105,9 @@ p {
 .maze-door-open {
     background-color: lightcoral;
 }
+.maze-start{
+    background: url(../images/maze-start.png) no-repeat center/cover;
+}
 
 .maze-end {
     background: url(../images/checkered-flag.png) no-repeat center/cover;
