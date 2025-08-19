@@ -373,8 +373,32 @@ document.addEventListener("DOMContentLoaded", function () {
       checkKeyEvent.detail.lastKeyPressed = "";
       checkKeyEvent.detail.status = "";
     }
-  });
+  
 
+  // Fetch trivia questions from Open Trivia DB
+  async function fetchTriviaQuestions(difficulty, numQuestions) {
+    try {
+      const response = await fetch`https://opentdb.com/api.php?amount=${numQuestions}&difficulty=${difficulty}&type=multiple`;
+      const data = await response.json();
+
+      return data.results.map(q => {
+        const options = [...q.incorrect_answers];
+        const correctIndex = Math.floor(Math.random() * (options.length + 1));
+        options.splice(correctIndex, 0, q.correct_answer);
+
+        return {
+          question: q.question,
+          options,
+          answer: q.correct_answer,
+          difficulty: q.difficulty
+        };
+      });
+    } catch (error) {
+      console.error("Failed to fetch trivia questions:", error);
+      return [];
+    }
+  }
+});
   // Add event listeners for buttons
   buttons = document.querySelectorAll("button");
   buttons.forEach((button) => {
