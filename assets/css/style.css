@@ -117,6 +117,10 @@ p {
     background-color: brown;
 }
 
+.maze-door-open{
+    background-color: lightcoral;
+}
+
 .wall-top{
     border-top: var(--wall-style);
 }
