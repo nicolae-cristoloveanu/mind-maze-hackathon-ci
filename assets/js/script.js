@@ -303,6 +303,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // Game difficulty settings
   const mazeSize = 15;
   const numDoors = 10;
+  
+  // Add maze dimension as style property to HTML element
+  // CSS then uses this to responsively scale the maze cell width depending 
+  // on viewport width and height
+  document.documentElement.style.setProperty('--maze-dimension',mazeSize);
 
   // Key bindings for keyboard control
   const keyDirectionMap = {
@@ -396,10 +401,9 @@ document.addEventListener("DOMContentLoaded", function () {
       } else if (
         event.currentTarget.getAttribute("data-type") === "direction-control"
       ) {
-        
         const keyPressed = event.currentTarget.getAttribute("data-direction");
         const direction = keyDirectionMap[keyPressed];
-        console.log(`DEBUG: Button pressed=>${direction}`); 
+        console.log(`DEBUG: Button pressed=>${direction}`);
         if (positionPlayer(direction) === "checkKey") {
           checkKeyEvent.detail.lastKeyPressed = keyPressed;
           document.dispatchEvent(checkKeyEvent);

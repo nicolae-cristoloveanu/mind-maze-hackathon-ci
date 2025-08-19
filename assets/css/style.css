@@ -26,8 +26,8 @@
     --border-light-purple: rgba(139, 139, 174, 0.3);
     --border-very-light: rgba(197, 255, 253, 0.15);
     /* Maze variables */
-    --wall-style: 3px solid black;
-    --maze-cell-width: 30px;
+    --wall-style: 2px solid black;
+    --maze-cell-width: calc(min(90vw,0.75*50vh)/var(--maze-dimension));
 }
 
 /* Global Styles */
@@ -64,22 +64,6 @@ h2 {
 
 h3 {
     font-size: 1.5rem;
-    line-height: 1.4;
-}
-
-h4 {
-    font-family: var(--secondary-font);
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    line-height: 1.4;
-}
-
-h5 {
-    font-family: var(--secondary-font);
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-color);
     line-height: 1.4;
 }
 
@@ -178,7 +162,7 @@ p {
     border: 2px dotted blue;
     height: 80%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -222,7 +206,8 @@ p {
 } */
 
 #game-controls .btn {
-    width: min(7vw);
+    width: 36px;
+    text-align: center;
 }
 
 .text-content-section .section-heading {
