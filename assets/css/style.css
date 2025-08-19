@@ -19,6 +19,7 @@
     /* dark teal */
     --text-color: #5D675B;
     /* dark teal */
+    --highlight-color-light-translucent: rgba(241, 187, 135, 0.7);
 
     /* Light border colors for sections */
     --border-light-cyan: rgba(197, 255, 253, 0.3);
@@ -27,7 +28,7 @@
     --border-very-light: rgba(197, 255, 253, 0.15);
     /* Maze variables */
     --wall-style: 2px solid black;
-    --maze-cell-width: calc(min(90vw, 0.75*50vh)/var(--maze-dimension));
+    --maze-cell-width: calc(min(80vw, 0.75*50vh)/var(--maze-dimension));
 }
 
 /* Global Styles */
@@ -105,7 +106,8 @@ p {
 .maze-door-open {
     background-color: lightcoral;
 }
-.maze-start{
+
+.maze-start {
     background: url(../images/maze-start.png) no-repeat center/cover;
 }
 
@@ -144,10 +146,6 @@ p {
 
 }
 
-#maze-area {
-    border: 2px dotted green;
-    width: calc(attr(data-maze-size) * var(var(--maze-cell-width)));
-}
 
 .section-content {
     /* padding: 6rem 0; */
@@ -155,6 +153,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: url(../images/background-image.webp) no-repeat center/cover;
 }
 
 .circle {
@@ -170,9 +169,14 @@ p {
 #game-section>.container {
     border: 2px dotted blue;
     height: 80%;
+    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--highlight-color-light-translucent);
+    backdrop-filter: blur(2px);
+    border: 2px solid coral;
+    border-radius: 0.5rem;
 }
 
 #game-section .row {
@@ -193,6 +197,13 @@ p {
 #game-section #game-area {
     height: 50%;
     border: 2px dotted coral;
+}
+
+#maze-area {
+    /* border: 2px dotted green; */
+    width: calc(attr(data-maze-size) * var(var(--maze-cell-width)));
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(2px);
 }
 
 #game-section #game-controls {
@@ -224,11 +235,11 @@ p {
 }
 
 #game-controls .btn[data-direction="ArrowLeft"] {
-    left: 30%;
+    left: 25%;
 }
 
 #game-controls .btn[data-direction="ArrowRight"] {
-    right: 30%;
+    right: 25%;
 }
 
 #game-controls .btn[data-direction="ArrowUp"] {
@@ -532,101 +543,56 @@ p {
     /* Subtle light text for copyright */
 }
 
-
-
-
-
-
-
-
-
 /* Media queries */
-
-/* Extra Small Devices (phones, less than 576px) */
-@media (max-width: 575.98px) {
-    .text-content-section {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+/* Extra small devices */
+@media screen and (min-width:768px) {
+    #game-controls .btn[data-direction="ArrowLeft"] {
+        left: 35%;
     }
 
-    .text-content-section .section-heading {
-        font-size: 1.5rem;
-    }
-
-    .feature-item h4 {
-        font-size: 1.2rem;
+    #game-controls .btn[data-direction="ArrowRight"] {
+        right: 35%;
     }
 }
 
-/* Small Devices (phones and small tablets, less than 768px) */
-@media (max-width: 767.98px) {
-
-    /* Text content section styles */
-    .text-content-section {
-        padding-top: 2.5rem;
-        padding-bottom: 2.5rem;
+/* Large Devices (desktops, 992px and larger) */
+@media screen and (min-width:992px) {
+    #game-controls .btn[data-direction="ArrowLeft"] {
+        left: 36%;
     }
 
-    .text-content-section .section-heading {
-        font-size: 1.75rem;
+    #game-controls .btn[data-direction="ArrowRight"] {
+        right: 36%;
     }
 
-    .text-content-section .lead {
-        font-size: 1.1rem;
+    #game-section .row {
+        width: 100%;
+        position: relative;
     }
 
-    /* Feature grid styles */
-    .feature-cube {
-        margin-bottom: 1.5rem;
+    #game-master-keys,
+    #game-stats {
+        position: absolute;
+        top: 42.5%;
+        width: 20%;
     }
 
-    .feature-grid-row {
-        margin-bottom: 0;
+    #game-master-keys {
+        left: 8%;
     }
 
-    .feature-item {
-        padding: 1.5rem;
-    }
-
-    .butterfly-icon {
-        width: 60px;
-        height: 60px;
+    #game-stats {
+        right: 8%;
     }
 }
 
-/* Medium Devices (tablets, 768px to 991.98px) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-    .feature-item {
-        padding: 1.75rem;
+/* Extra large devices (larger than 1400px) */
+@media screen and (min-width:1400px) {
+    #game-controls .btn[data-direction="ArrowLeft"] {
+        left: 37%;
     }
 
-    .feature-text {
-        font-size: 1rem;
-    }
-
-    .text-content-section {
-        padding: 3.5rem 1.5rem;
-    }
-}
-
-/* Large Devices (desktops, 992px to 1199.98px) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-    .text-content-section {
-        padding: 4.5rem 2rem;
-    }
-
-    .feature-item {
-        padding: 2rem;
-    }
-}
-
-/* Extra Large Devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-    .text-content-section {
-        padding: 5rem 2.5rem;
-    }
-
-    .feature-grid-row {
-        margin-bottom: 2.5rem;
+    #game-controls .btn[data-direction="ArrowRight"] {
+        right: 37%;
     }
 }
