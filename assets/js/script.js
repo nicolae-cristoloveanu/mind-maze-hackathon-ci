@@ -163,6 +163,7 @@ function drawMaze(maze, solution = null) {
   const mazeSize = maze["cells"].length;
 
   const mazeArea = document.querySelector("#maze-area");
+  mazeArea.innerHTML="";
   mazeArea.setAttribute("data-maze-size", mazeSize);
   for (let row = 0; row < mazeSize; row++) {
     const mazeRow = document.createElement("div");
@@ -362,20 +363,49 @@ function gameEnd(gameState) {
     document.querySelector("#game-end-modal .modal-body>p").innerHTML ='You are locked. Thou shall not pass!!!';
   }
   gameEndModal.show();
-
-  gameState.reset();
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+function gameStart(gameState){
+  // TODO: Read settings from into section
   // Game difficulty settings
   const mazeSize = 15;
   const numDoors = 10;
   const numKeys = 5;
 
+  gameState.reset();
   // Add maze dimension as style property to HTML element
   // CSS then uses this to responsively scale the maze cell width depending
   // on viewport width and height
   document.documentElement.style.setProperty("--maze-dimension", mazeSize);
+  
+  // Game setup
+  const maze = generateMazeMap(mazeSize, mazeSize);
+  console.log("DEBUG:maze=>\n");
+  console.log(maze);
+
+  const solution = findSolutionMaze(maze["cells"]);
+  console.log("DEBUG:solution=>\n");
+  console.log(solution);
+
+  const doorPositions = placeDoors(solution, numDoors);
+  console.log("DEBUG:doorPositions=>\n");
+  console.log(doorPositions);
+  // Update maze to insert doors
+  doorPositions.forEach((position) => {
+    maze["cells"][position[0]][position[1]]["door"] = true;
+  });
+
+  // Initialize number of Keys for the game
+  gameState.initializeKeys(numKeys);
+  updateHeadsUpDisplay(gameState);
+
+  // Render maze in HTML
+  drawMaze(maze);
+
+  document.getElementById("game-area").focus();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
 
   // Key bindings for keyboard control
   const keyDirectionMap = {
@@ -433,38 +463,15 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   };
 
-  // Game setup
-  const maze = generateMazeMap(mazeSize, mazeSize);
-  console.log("DEBUG:maze=>\n");
-  console.log(maze);
-
-  const solution = findSolutionMaze(maze["cells"]);
-  console.log("DEBUG:solution=>\n");
-  console.log(solution);
-
-  const doorPositions = placeDoors(solution, numDoors);
-  console.log("DEBUG:doorPositions=>\n");
-  console.log(doorPositions);
-  // Update maze to insert doors
-  doorPositions.forEach((position) => {
-    maze["cells"][position[0]][position[1]]["door"] = true;
-  });
-
-  // Initialize number of Keys for the game
-  gameState.initializeKeys(numKeys);
-  updateHeadsUpDisplay(gameState);
-
-  // Render maze in HTML
-  //   drawMaze(maze, solution);
-  drawMaze(maze);
-
-  // Custom Events
+  // Custom Event object to trigger trivia to unlock door
   const checkKeyEvent = new CustomEvent("checkKey", {
     detail: {
       lastKeyPressed: "",
       status: "",
     },
   });
+
+  gameStart(gameState);
 
   // Add event listener for Key presses
   document.addEventListener("keydown", (event) => {
@@ -524,6 +531,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+
   // Add event listeners for buttons
   buttons = document.querySelectorAll("button");
   buttons.forEach((button) => {
@@ -549,7 +557,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else if (
         event.currentTarget.getAttribute("data-type") === "masterkey"
       ) {
-        // TODO: add logic to decrement master key count
+        // decrement master key count
         gameState.useMasterKey();
         updateHeadsUpDisplay(gameState);
         console.log(
@@ -572,6 +580,12 @@ document.addEventListener("DOMContentLoaded", function () {
           gameState.gameOverStatus = "gameWon";
           gameEnd(gameState);
         }
+      } else if(event.currentTarget.getAttribute("data-type") === "play-again"){
+        console.log(`DEBUG: Play again`);
+        gameStart(gameState);
+      } else if(event.currentTarget.getAttribute("data-type")==="new-game"){
+        console.log(`DEBUG: Start new game`);
+        //TODO: Redirect to intro section
       }
     });
   });
