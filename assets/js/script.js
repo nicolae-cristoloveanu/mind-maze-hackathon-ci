@@ -299,15 +299,50 @@ function askTrivia() {
   triviaModal.show();
 }
 
+/**
+ * Function to update the Heads Up Display
+ * @param {object} gameState 
+ */
+function updateHeadsUpDisplay(gameState) {
+  const masterKeyArea = document.querySelector(
+    "#game-master-keys > div:last-child"
+  );
+  const gameStatsCorrectArea = document.querySelector("#correct>span");
+  const gameStatsSkippedArea = document.querySelector("#skip>span");
+
+  // Display Master Keys
+  let message = "";
+  for (let count = 0; count < gameState.returnKeysLeft(); count++) {
+    message += '<i class="fa-solid fa-key"></i>';
+  }
+  for (
+    let count = gameState.returnKeysLeft();
+    count < gameState.totalKeysAvailable;
+    count++
+  ) {
+    message += '<i class="fa-solid fa-key used-key"></i>';
+  }
+  masterKeyArea.innerHTML = message;
+
+  // Display Game Stats
+  gameStatsCorrectArea.innerHTML = `${
+    gameState.returnGameStatistics().correct
+  }/${gameState.returnGameStatistics().questions}`;
+  gameStatsSkippedArea.innerHTML = `${
+    gameState.returnGameStatistics().skipped
+  }/${gameState.returnGameStatistics().questions}`;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   // Game difficulty settings
   const mazeSize = 15;
   const numDoors = 10;
-  
+  const numKeys = 5;
+
   // Add maze dimension as style property to HTML element
-  // CSS then uses this to responsively scale the maze cell width depending 
+  // CSS then uses this to responsively scale the maze cell width depending
   // on viewport width and height
-  document.documentElement.style.setProperty('--maze-dimension',mazeSize);
+  document.documentElement.style.setProperty("--maze-dimension", mazeSize);
 
   // Key bindings for keyboard control
   const keyDirectionMap = {
@@ -336,37 +371,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Game state object
   const gameState = {
-    numMasterKeys: 5,
+    totalKeysAvailable: 0,
+    numMasterKeys: 0,
     numQuestions: 0,
     numCorrect: 0,
-    numIncorrect: 0,
-    useMasterKey: function() {
-      if(this.numMasterKeys > 0){
+    numSkipped: 0,
+    initializeKeys: function (keys) {
+      this.totalKeysAvailable = keys;
+      this.numMasterKeys = keys;
+    },
+    useMasterKey: function () {
+      if (this.numMasterKeys > 0) {
         this.numMasterKeys--;
+        this.numSkipped++;
+        this.numQuestions++;
       }
     },
-    areKeysLeft: function() {
-      return (this.numMasterKeys)? true: false;
+    areKeysLeft: function () {
+      return this.numMasterKeys ? true : false;
     },
-    incrementCorrect: function() {
+    incrementCorrect: function () {
       this.numQuestions++;
-      this.Correct++;
+      this.numCorrect++;
     },
-    incrementInCorrect: function() {
-      this.numQuestions++;
-      this.numIncorrect++;
-    },
-    returnGameStatistics: function() {
+    returnGameStatistics: function () {
       return {
         questions: this.numQuestions,
         correct: this.numCorrect,
-        incorrect: this.numIncorrect,
-      }
+        skipped: this.numSkipped,
+      };
     },
-    returnKeysLeft: function(){
+    returnKeysLeft: function () {
       return this.numMasterKeys;
     },
-  }
+  };
+
+  // Initialize number of Keys for the game
+  gameState.initializeKeys(numKeys);
+  updateHeadsUpDisplay(gameState);
 
   // Render maze in HTML
   //   drawMaze(maze, solution);
@@ -407,32 +449,32 @@ document.addEventListener("DOMContentLoaded", function () {
       checkKeyEvent.detail.lastKeyPressed = "";
       checkKeyEvent.detail.status = "";
     }
-  
 
-  // Fetch trivia questions from Open Trivia DB
-  async function fetchTriviaQuestions(difficulty, numQuestions) {
-    try {
-      const response = await fetch`https://opentdb.com/api.php?amount=${numQuestions}&difficulty=${difficulty}&type=multiple`;
-      const data = await response.json();
+    // Fetch trivia questions from Open Trivia DB
+    async function fetchTriviaQuestions(difficulty, numQuestions) {
+      try {
+        const response =
+          await fetch`https://opentdb.com/api.php?amount=${numQuestions}&difficulty=${difficulty}&type=multiple`;
+        const data = await response.json();
 
-      return data.results.map(q => {
-        const options = [...q.incorrect_answers];
-        const correctIndex = Math.floor(Math.random() * (options.length + 1));
-        options.splice(correctIndex, 0, q.correct_answer);
+        return data.results.map((q) => {
+          const options = [...q.incorrect_answers];
+          const correctIndex = Math.floor(Math.random() * (options.length + 1));
+          options.splice(correctIndex, 0, q.correct_answer);
 
-        return {
-          question: q.question,
-          options,
-          answer: q.correct_answer,
-          difficulty: q.difficulty
-        };
-      });
-    } catch (error) {
-      console.error("Failed to fetch trivia questions:", error);
-      return [];
+          return {
+            question: q.question,
+            options,
+            answer: q.correct_answer,
+            difficulty: q.difficulty,
+          };
+        });
+      } catch (error) {
+        console.error("Failed to fetch trivia questions:", error);
+        return [];
+      }
     }
-  }
-});
+  });
   // Add event listeners for buttons
   buttons = document.querySelectorAll("button");
   buttons.forEach((button) => {
@@ -440,12 +482,13 @@ document.addEventListener("DOMContentLoaded", function () {
       // Functionality based on button clicked
       if (event.currentTarget.getAttribute("data-type") === "trivia-correct") {
         gameState.incrementCorrect();
+        updateHeadsUpDisplay(gameState);
         checkKeyEvent.detail.status = "open";
         document.dispatchEvent(checkKeyEvent);
       } else if (
         event.currentTarget.getAttribute("data-type") === "trivia-incorrect"
       ) {
-        gameState.incrementInCorrect();
+        updateHeadsUpDisplay(gameState);
         console.log(`DEBUG: Incorrect Answer.\nGame End!`);
         // Clear Event details
         checkKeyEvent.detail.lastKeyPressed = "";
@@ -456,7 +499,10 @@ document.addEventListener("DOMContentLoaded", function () {
       ) {
         // TODO: add logic to decrement master key count
         gameState.useMasterKey();
-        console.log(`DEBUG: Master Key used - ${gameState.returnKeysLeft()} master keys left`);
+        updateHeadsUpDisplay(gameState);
+        console.log(
+          `DEBUG: Master Key used - ${gameState.returnKeysLeft()} master keys left`
+        );
         checkKeyEvent.detail.status = "open";
         document.dispatchEvent(checkKeyEvent);
       } else if (

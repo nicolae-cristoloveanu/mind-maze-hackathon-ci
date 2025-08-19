@@ -201,10 +201,6 @@ p {
     border: 2px dotted coral;
 }
 
-/* #game-section:hover, #maze-exploration:hover {
-    background-color: var(--secondary-color);
-} */
-
 #game-controls {
     position: relative;
 }
@@ -234,8 +230,19 @@ p {
     bottom: 5%;
 }
 
-.text-content-section .section-heading {
-    margin-bottom: 2rem;
+/* Master Key Display */
+.fa-key.used-key{
+    opacity: 30%;
+}
+
+#game-stats,
+#game-master-keys{
+    display: flex;
+    flex-direction: column;
+}
+#game-master-keys > p {
+    display: block;
+    width: 100%;
 }
 
 
