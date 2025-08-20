@@ -314,6 +314,19 @@ p {
     padding: 0;
 }
 
+#game-stats .row{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+#game-stats span {
+    /* margin: 0.5rem; */
+    display: flex;
+    justify-content: center;
+    height:20%;
+}
+
 #game-controls .btn {
     --btn-height: 30%;
     height: var(--btn-height);
