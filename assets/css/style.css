@@ -406,7 +406,12 @@ p {
 .modal-content {
     border-radius: 25px;
     border: 8px solid #8B4513;
-    background: linear-gradient(135deg, #F4E4BC 0%, #E8D5A3 50%, #DCC48A 100%);
+    background: 
+        linear-gradient(rgba(139, 69, 19, 0.1), rgba(139, 69, 19, 0.1)),
+        url('../images/moria-door.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     position: relative;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
@@ -434,7 +439,7 @@ p {
 .modal-header {
     padding: 2rem 2rem 1rem;
     border-bottom: 3px solid #8B4513;
-    background: linear-gradient(135deg, #F4E4BC 0%, #E8D5A3 100%);
+    background: rgba(244, 228, 188, 0.3);
     border-radius: 20px 20px 0 0;
 }
 
@@ -453,7 +458,7 @@ p {
 
 .modal-body {
     padding: 1.5rem 2rem;
-    background: linear-gradient(135deg, #F4E4BC 0%, #E8D5A3 100%);
+    background: rgba(244, 228, 188, 0.3);
 }
 
 .modal-body p {
@@ -519,7 +524,7 @@ p {
 .modal-footer {
     padding: 1rem 2rem 2rem;
     border-top: 3px solid #8B4513;
-    background: linear-gradient(135deg, #F4E4BC 0%, #E8D5A3 100%);
+    background: rgba(244, 228, 188, 0.3);
     border-radius: 0 0 20px 20px;
     text-align: center;
     display: flex;
