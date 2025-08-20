@@ -20,7 +20,8 @@
     <!-- Navigation Bar -->
     <nav id="navbar" class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><img src="assets/images/wizard3.png" alt="Mind Maze Logo" class="logo">Mind Maze</a>
+            <a class="navbar-brand" href="index.html"><img src="assets/images/wizard3.png" alt="Mind Maze Logo"
+                    class="logo">Mind Maze</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -38,40 +39,43 @@
         </div>
     </nav>
     <!-- Header -->
-    <header id="home">
-        <!-- Intro Section Start -->
+    <header id="intro" class="section-content">
+        <div class="container">
+            <div class="row">
+                <div id="intro-hero" class="col-12 col-lg-8">
+                    <!-- Game Logo / Image -->
+                    <img src="assets/images/maze-logo.png" alt="Mind Maze Logo" class="mb-4" style="max-width: 150px;">
+                </div>
+                <div id="intro-title" class="col-12 col-lg-8">
+                    <!-- Game Title -->
+                    <h1>Mind Maze</h1>
+                </div>
+                <div id="intro-buttons" class="col-12 col-lg-8">
+                    <!-- Game Buttons -->
+                    <button type="button" class="btn">Start Game!</button>
+                    <div id="game-settings">
+                        <label for="difficulty-slider">Choose you journey!</label>
+                        <input type="range" id="difficulty-slider" min="1" max="3" step="1" value="1">
+                        <div>
+                            <span>Easy</span>
+                            <span>Medium</span>
+                            <span>Hard</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-info me-2" data-bs-toggle="modal"
+                        data-bs-target="#tutorialModal">
+                        Tutorial
+                    </button>
 
-        <section class="text-center py-5" id="intro">
-
-            <!-- Game Title -->
-            <h1 class="display-4 fw-bold mb-3">Mind Maze</h1>
-
-            <!-- Game Logo / Image -->
-            <img src="assets/maze-logo.png" alt="Mind Maze Logo" class="mb-4" style="max-width: 150px;">
-
-            <!-- Game Buttons -->
-            <div class="mb-4">
-                <button type="button" class="btn btn-success me-2" onclick="startGame()">Start Game</button>
-
-                <button type="button" class="btn btn-info me-2" data-bs-toggle="modal" data-bs-target="#tutorialModal">
-                    Tutorial
-                </button>
-
-                <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal"
-                    data-bs-target="#settingsModal">
-                    Settings
-                </button>
-
-                <button type="button" class="btn btn-danger ms-2" onclick="exitGame()">Exit/Quit</button>
+                </div>
             </div>
 
-        </section>
-        
-        <!-- Tutorial Modal -->
+        </div>
 
+        <!-- Tutorial Modal -->
         <div class="modal fade" id="tutorialModal" tabindex="-1" aria-labelledby="tutorialModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
 
                     <div class="modal-header">
@@ -94,46 +98,7 @@
                 </div>
             </div>
         </div>
-
-      <!-- Settings Modal -->
-
-        <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="settingsModalLabel">Difficulty Settings</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div class="modal-body">
-                        <p>Select your preferred difficulty level:</p>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="difficulty" id="easy" value="easy"
-                                checked>
-                            <label class="form-check-label" for="easy">
-                                Easy Mode – standard maze size
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="difficulty" id="hard" value="hard">
-                            <label class="form-check-label" for="hard">
-                                Difficult – larger maze or faster movement
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="saveSettings">Save & Exit</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-       </header>
+    </header>
 
     <!-- Main Content -->
     <main>
@@ -159,11 +124,11 @@
                         <button class="btn btn-primary circle" data-type="direction-control"
                             data-direction="ArrowDown"><i class="fa-solid fa-arrow-down"></i></button>
                     </div>
-                    <div id="game-master-keys" class="col-6 col-lg-6">
+                    <div id="game-master-keys" class="col-5 col-lg-6">
                         <div>Master Keys</div>
                         <div></div>
                     </div>
-                    <div id="game-stats" class="col-6 col-lg-6">
+                    <div id="game-stats" class="col-5 col-lg-6">
                         <div id="correct">Correct<span></span></div>
                         <div id="skip">Skip<span></span></div>
                     </div>
@@ -189,16 +154,22 @@
                         <img src="assets/images/wizard.webp" alt="Wizard Guardian" class="wizard-image">
                     </div>
                     <p class="lead mb-3">A challenge awaits you at this door.</p>
-                    <p>Do you know the answer to this trivia question? Choose wisely, as your knowledge will determine your path forward through the maze.</p>
-                    <p class="mb-3">Remember, you have master keys available if you find yourself in need of assistance on your journey.</p>
+                    <p>Do you know the answer to this trivia question? Choose wisely, as your knowledge will determine
+                        your path forward through the maze.</p>
+                    <p class="mb-3">Remember, you have master keys available if you find yourself in need of assistance
+                        on your journey.</p>
                     <div class="alert border-0">
-                        <strong>Challenge Question:</strong> <span>This is where the trivia question will appear when the API integration is complete.</span>
+                        <strong>Challenge Question:</strong> <span>This is where the trivia question will appear when
+                            the API integration is complete.</span>
                     </div>
                 </div>
                 <div class="modal-footer border-0 justify-content-center">
-                    <button type="button" class="btn me-2" data-bs-dismiss="modal" data-type="trivia-correct">Correct Answer</button>
-                    <button type="button" class="btn me-2" data-bs-dismiss="modal" data-type="trivia-incorrect">Wrong Answer</button>
-                    <button type="button" class="btn" data-bs-dismiss="modal" data-type="masterkey">Use Master Key</button>
+                    <button type="button" class="btn me-2" data-bs-dismiss="modal" data-type="trivia-correct">Correct
+                        Answer</button>
+                    <button type="button" class="btn me-2" data-bs-dismiss="modal" data-type="trivia-incorrect">Wrong
+                        Answer</button>
+                    <button type="button" class="btn" data-bs-dismiss="modal" data-type="masterkey">Use Master
+                        Key</button>
                 </div>
             </div>
         </div>
@@ -221,7 +192,8 @@
                     </div>
                 </div>
                 <div class="modal-footer border-0 justify-content-center">
-                    <button type="button" class="btn me-2" data-bs-dismiss="modal" data-type="play-again">Play Again!</button>
+                    <button type="button" class="btn me-2" data-bs-dismiss="modal" data-type="play-again">Play
+                        Again!</button>
                     <button type="button" class="btn" data-bs-dismiss="modal" data-type="new-game">New Game</button>
                 </div>
             </div>

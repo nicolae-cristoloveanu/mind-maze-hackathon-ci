@@ -370,7 +370,7 @@ function gameEnd(gameState) {
 function gameStart(gameState) {
   // TODO: Read settings from into section
   // Game difficulty settings
-  const mazeSize = 10;
+  const mazeSize = 15;
   const numDoors = 10;
   const numKeys = 5;
 
@@ -570,7 +570,7 @@ document.addEventListener("DOMContentLoaded", function () {
       checkKeyEvent.detail.status = "";
     }
   });
-  
+
   // Add event listeners for buttons
   const buttons = document.querySelectorAll("button");
   buttons.forEach((button) => {
