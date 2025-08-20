@@ -534,6 +534,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Add event listeners for buttons
   buttons = document.querySelectorAll("button");
+  
+  
   buttons.forEach((button) => {
     button.addEventListener("click", (event) => {
       // Functionality based on button clicked
