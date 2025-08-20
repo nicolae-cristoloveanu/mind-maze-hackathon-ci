@@ -143,78 +143,52 @@
     </main>
 
     <!-- Trivia Modal Section -->
-    <div id="trivia-modal" class="modal fade" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Thou Shall Not Pass!</h5>
-                </div>
-                <div class="modal-body">
-                    <p>Do you know the answer to this trivia question?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        data-type="trivia-correct">Correct</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        data-type="trivia-incorrect">Incorrect</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        data-type="masterkey">Masterkey</button>
-                    <!-- </div> -->
-                </div>
-            </div>
-        </div>
-    </div>
-    </section>
-
-
-    <!-- Test Modal -->
-    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div id="trivia-modal" class="modal fade" tabindex="-1" aria-labelledby="triviaModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header border-0 text-center">
-                    <h5 class="modal-title w-100" id="successModalLabel">
-                        <i class="fas fa-leaf me-2"></i>
-                        Your Message Has Been Sent
+                    <h5 class="modal-title w-100" id="triviaModalLabel">
+                        <i class="fas fa-question-circle me-2"></i>
+                        Thou Shall Not Pass!
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <p class="lead mb-3">Thank you for reaching out to us.</p>
-                    <p>Like seeds carried by gentle winds, your message has found its way to us. Just as nature takes
-                        time to nurture growth, we'll carefully tend to your inquiry and respond thoughtfully.</p>
-                    <p class="mb-3">While you wait, remember that reaching out for support is a beautiful act of
-                        self-care—much like a flower turning toward the sun.</p>
+                    <p class="lead mb-3">A challenge awaits you at this door.</p>
+                    <p>Do you know the answer to this trivia question? Choose wisely, as your knowledge will determine your path forward through the maze.</p>
+                    <p class="mb-3">Remember, you have master keys available if you find yourself in need of assistance on your journey.</p>
                     <div class="alert border-0">
-                        <strong>Gentle Reminder:</strong> <span>If you're experiencing a mental health crisis, please
-                            don't hesitate to contact emergency services or call a mental health helpline immediately.
-                            Your well-being is precious, and immediate support is always available.</span>
+                        <strong>Challenge Question:</strong> <span>This is where the trivia question will appear when the API integration is complete.</span>
                     </div>
                 </div>
                 <div class="modal-footer border-0 justify-content-center">
-                    <button type="button" class="btn" data-bs-dismiss="modal">Continue Your Journey</button>
+                    <button type="button" class="btn me-2" data-bs-dismiss="modal" data-type="trivia-correct">Correct Answer</button>
+                    <button type="button" class="btn me-2" data-bs-dismiss="modal" data-type="trivia-incorrect">Wrong Answer</button>
+                    <button type="button" class="btn" data-bs-dismiss="modal" data-type="masterkey">Use Master Key</button>
                 </div>
             </div>
         </div>
     </div>
-    </div>
     </section>
 
+
     <!-- Game End Modal -->
-    <div id="game-end-modal" class="modal fade" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
+    <div id="game-end-modal" class="modal fade" tabindex="-1" aria-labelledby="gameEndModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"></h5>
+                <div class="modal-header border-0 text-center">
+                    <h5 class="modal-title w-100" id="gameEndModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <p></p>
+                <div class="modal-body text-center">
+                    <p class="lead mb-3"></p>
+                    <div class="alert border-0">
+                        <strong>Game Complete!</strong> <span>Your maze adventure has reached its conclusion.</span>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-type="play-again">Play
-                        Again!</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-type="new-game">New
-                        Game</button>
-                    <!-- </div> -->
+                <div class="modal-footer border-0 justify-content-center">
+                    <button type="button" class="btn me-2" data-bs-dismiss="modal" data-type="play-again">Play Again!</button>
+                    <button type="button" class="btn" data-bs-dismiss="modal" data-type="new-game">New Game</button>
                 </div>
             </div>
         </div>
