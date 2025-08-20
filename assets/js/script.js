@@ -625,9 +625,16 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(`DEBUG: Play again`);
         gameStart(gameState);
       } else if (event.currentTarget.getAttribute("data-type") === "new-game") {
+        console.log(`DEBUG: Go to Intro`);
+        document.querySelector("#intro").classList.remove("hide");
+        document.querySelector("#game-section").classList.add("hide");
+      } else if(event.currentTarget.getAttribute("data-type") === "game-start"){
         console.log(`DEBUG: Start new game`);
-        //TODO: Redirect to intro section
+        document.querySelector("#intro").classList.add("hide");
+        document.querySelector("#game-section").classList.remove("hide");
+        gameStart(gameState);
       }
+
       // Add event listeners to remove focus for bootstrap modals triggered
       // programmatically
       if (button.hasAttribute("data-bs-dismiss")) {
