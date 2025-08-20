@@ -356,11 +356,11 @@ function gameEnd(gameState) {
   if (gameState.gameOverStatus === "gameWon") {
     document.querySelector("#game-end-modal .modal-title").innerHTML =
       '<i class="fa-solid fa-graduation-cap"></i>Congratulations!!!';
-    document.querySelector("#game-end-modal .modal-body>p").innerHTML ='You completed the mission!!!';
+    document.querySelector("#game-end-modal .modal-body .lead").innerHTML ='You completed the mission!!!';
   } else if (gameState.gameOverStatus === "gameLost") {
     document.querySelector("#game-end-modal .modal-title").innerHTML =
       '<i class="fa-solid fa-circle-exclamation"></i>Commiserations!!!';
-    document.querySelector("#game-end-modal .modal-body>p").innerHTML ='You are locked. Thou shall not pass!!!';
+    document.querySelector("#game-end-modal .modal-body .lead").innerHTML ='You are locked. Thou shall not pass!!!';
   }
   gameEndModal.show();
 }
