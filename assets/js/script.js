@@ -77,7 +77,6 @@ function generateMazeMap(row, col) {
   return { cells: cells, path: path };
 }
 
-
 /**
  * Function to find the solution path for the provided maze
  * @param {object} maze : object returned from generateMazeMap
@@ -416,68 +415,6 @@ document.addEventListener("DOMContentLoaded", function () {
     ArrowLeft: "LEFT",
   };
 
-  // Question bank object for handling trivia storage and retrieval
-const questionBank = {
-  bank: [],
-
-  // Fetch 10 questions and add to bank
-  async fetchQuestions(difficulty = 'medium', numQuestions = 10) {
-    try {
-      const response = await fetch(
-        `https://opentdb.com/api.php?amount=${numQuestions}&difficulty=${difficulty}&type=multiple`
-      );
-      const data = await response.json();
-      const newQuestions = data.results.map(q => {
-        const options = [...q.incorrect_answers];
-        const correctIndex = Math.floor(Math.random() * (options.length + 1));
-        options.splice(correctIndex, 0, q.correct_answer);
-        return {
-          question: q.question,
-          options,
-          answer: q.correct_answer,
-          difficulty: q.difficulty
-        };
-      });
-      // Add up to 10 questions at a time
-      this.bank.push(...newQuestions);
-      console.log(`DEBUG: Fetched ${newQuestions.length} new questions. Total in bank: ${this.bank.length}`);
-    } catch (err) {
-      console.error("Failed to fetch trivia questions:", err);
-    }
-  },
-
-  // Pop and return a random question from the bank
-  retrieveRandomQuestion() {
-    if (this.bank.length === 0) {
-      console.warn("Question bank empty, fetching new questions...");
-      // In practice, you should await fetchQuestions before returning, but for demo:
-      return null;
-    }
-    const idx = Math.floor(Math.random() * this.bank.length);
-    return this.bank.splice(idx, 1)[0];
-  }
-};
-
-// Use inside an async function (so await is valid)
-async function main() {
-  // Fill the bank with questions on app start
-  await questionBank.fetchQuestions('medium', 10);
-
-  // Example usage: get a question for a trivia event
-  let question = questionBank.retrieveRandomQuestion();
-  if (!question) {
-    // If empty, fetch again (unlikely right after filling!)
-    await questionBank.fetchQuestions('medium', 10);
-    question = questionBank.retrieveRandomQuestion();
-  }
-  // Now use question.question, question.options, question.answer in your UI or logic
-  console.log("Random question chosen:", question);
-}
-
-// Call main on page load
-main();
-
-  
   // Game state object
   const gameState = {
     gameOver: false,
@@ -568,11 +505,12 @@ main();
       checkKeyEvent.detail.lastKeyPressed = "";
       checkKeyEvent.detail.status = "";
     }
-    
-    });
+  });
 
   // Add event listeners for buttons
   buttons = document.querySelectorAll("button");
+  
+  
   buttons.forEach((button) => {
     button.addEventListener("click", (event) => {
       // Functionality based on button clicked
@@ -629,7 +567,7 @@ main();
     });
   });
 
-
+  // New functions for trivia API integration (added without modifying existing code)
   
   // Fetch trivia questions from Open Trivia DB (moved from inside event listener)
   async function fetchTriviaQuestions(difficulty = "easy", numQuestions = 1) {
@@ -762,4 +700,3 @@ main();
   }, true); // Use capture phase to run before the original listener
 
 });
-
