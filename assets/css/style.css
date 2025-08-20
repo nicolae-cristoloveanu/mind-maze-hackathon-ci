@@ -20,18 +20,22 @@
     --text-color: #5D675B;
     /* dark teal */
 
+    --primary-color-translucent: rgba(247,239,153,0.5);
+    --secondary-color-translucent: rgba(171,225,136,0.5);
+    --highlight-color-light-translucent: rgba(241, 187, 135, 0.65);
+
     /* Light border colors for sections */
     --border-light-cyan: rgba(197, 255, 253, 0.3);
     --border-light-blue: rgba(136, 217, 230, 0.3);
     --border-light-purple: rgba(139, 139, 174, 0.3);
     --border-very-light: rgba(197, 255, 253, 0.15);
     /* Maze variables */
-    --wall-style: 3px solid black;
-    --maze-cell-width: 30px;
+    --wall-style: 2px solid black;
+    --maze-cell-width: calc(min(80vw, 0.75*50vh)/var(--maze-dimension));
 }
 
 /* Global Styles */
-*{
+* {
     box-sizing: border-box;
 }
 
@@ -46,7 +50,6 @@ h1,
 h2,
 h3 {
     font-family: var(--secondary-font);
-    color: var(--primary-color);
     font-weight: 700;
 }
 
@@ -54,6 +57,7 @@ h1 {
     font-size: 2.5rem;
     line-height: 1.2;
     text-transform: uppercase;
+    color: var(--primary-color);
 }
 
 h2 {
@@ -64,22 +68,6 @@ h2 {
 
 h3 {
     font-size: 1.5rem;
-    line-height: 1.4;
-}
-
-h4 {
-    font-family: var(--secondary-font);
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    line-height: 1.4;
-}
-
-h5 {
-    font-family: var(--secondary-font);
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-color);
     line-height: 1.4;
 }
 
@@ -94,63 +82,192 @@ p {
     font-weight: 400;
     line-height: 1.6;
 }
+
 /* Maze global classes */
-.maze-row{
+.maze-row {
     display: flex;
     justify-content: center;
 }
 
-.maze-cell{
+.maze-cell {
     width: var(--maze-cell-width);
     height: var(--maze-cell-width);
 }
 
-.maze-path{
+.maze-path {
     background-color: palevioletred;
 }
 
-.maze-solution{
+.maze-solution {
     background-color: lawngreen;
 }
 
-.maze-door{
+.maze-door {
     background-color: brown;
 }
 
-.wall-top{
+.maze-door-open {
+    background-color: lightcoral;
+}
+
+.maze-start {
+    background: url(../images/maze-start.png) no-repeat center/cover;
+}
+
+.maze-end {
+    background: url(../images/checkered-flag.png) no-repeat center/cover;
+}
+
+.wall-top {
     border-top: var(--wall-style);
 }
 
-.wall-right{
+.wall-right {
     border-right: var(--wall-style);
 }
 
-.wall-bottom{
+.wall-bottom {
     border-bottom: var(--wall-style);
 }
 
-.wall-left{
+.wall-left {
     border-left: var(--wall-style);
 }
 
-.player-position{
+.player-position {
     display: flex;
     justify-content: center;
     align-items: center;
     /* background-color: blue; */
 }
 
-.player{
+.player {
     background-color: blue;
-    width:80%;
+    width: 80%;
     aspect-ratio: 1;
     border-radius: 50%;
 
 }
 
-#maze-area{
-    border: 2px dotted green;
+.section-content {
+    /* padding: 6rem 0; */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(../images/background-image.webp) no-repeat center/cover;
+}
+
+.circle {
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+/* Puzzle section */
+/* #game-section, #maze-exploration {
+    transition: background-color 0.3s ease;
+} */
+
+#game-section>.container {
+    border: 2px dotted blue;
+    height: 80%;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--highlight-color-light-translucent);
+    backdrop-filter: blur(2px);
+    border: 2px solid coral;
+    border-radius: 0.5rem;
+}
+
+#game-section .row {
+    height: 100%;
+}
+
+#game-section .row>div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#game-section #section-heading {
+    height: 10%;
+    /* border: 2px dotted coral; */
+}
+
+#game-section #game-area {
+    height: 50%;
+    /* border: 2px dotted coral; */
+}
+
+#maze-area {
+    /* border: 2px dotted green; */
     width: calc(attr(data-maze-size) * var(var(--maze-cell-width)));
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+#game-controls {
+    height: 22%;
+    border: 1px solid coral;
+    margin: 0.5rem 0;
+    border-radius: 0.5rem;
+    /* background-color: var(--highlight-color-light-translucent); */
+    position: relative;
+}
+
+#game-master-keys {
+    height: 15%;
+    border: 2px solid var(--primary-color);
+    background-color: var(--primary-color-translucent);
+    backdrop-filter: blur(1px);
+    border-bottom-left-radius: 0.5rem;
+}
+
+#game-stats {
+    height: 15%;
+    border: 2px solid var(--primary-color);
+    background-color: var(--primary-color-translucent);
+    backdrop-filter: blur(1px);
+    border-bottom-right-radius: 0.5rem;
+
+}
+
+#game-controls .btn {
+    --btn-height: 30%;
+    height: var(--btn-height);
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+}
+
+#game-controls .btn[data-direction="ArrowLeft"] {
+    left: 25%;
+}
+
+#game-controls .btn[data-direction="ArrowRight"] {
+    right: 25%;
+}
+
+#game-controls .btn[data-direction="ArrowUp"] {
+    top: 5%;
+}
+
+#game-controls .btn[data-direction="ArrowDown"] {
+    bottom: 5%;
+}
+
+/* Master Key Display */
+.fa-key.used-key {
+    opacity: 30%;
+}
+
+#game-stats,
+#game-master-keys {
+    display: flex;
+    flex-direction: column;
 }
 
 /* Navbar */
@@ -202,8 +319,6 @@ p {
     border-color: var(--text-color);
 
 }
-
-
 
 /* Feature Section */
 
@@ -431,117 +546,133 @@ p {
     /* Subtle light text for copyright */
 }
 
-
-
-
-
-
-
-/* Additional styles for centered sections */
-.text-content-section {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+/* Modal Styles - Testing */
+.modal-content {
+    border-radius: 25px;
+    border: 3px solid var(--border-light-cyan);
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
 
-#puzzle-challenge, #maze-exploration {
-    transition: background-color 0.3s ease;
+
+.modal-header {
+    padding: 2rem 2rem 1rem;
 }
 
-#puzzle-challenge:hover, #maze-exploration:hover {
-    background-color: var(--secondary-color);
+.modal-title {
+    font-family: var(--secondary-font);
+    color: var(--text-color);
+    font-weight: 600;
 }
 
-.text-content-section .section-heading {
-    margin-bottom: 2rem;
+.modal-title .fas.fa-leaf {
+    color: var(--highlight-color-light);
 }
+
+.modal-body {
+    padding: 1rem 2rem;
+}
+
+.modal-body p {
+    font-family: var(--primary-font);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.modal-body .lead {
+    font-family: var(--primary-font);
+    color: var(--text-color);
+}
+
+.modal-body .alert {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: 15px;
+    border: 2px solid var(--border-light-blue);
+}
+
+.modal-body .alert strong,
+.modal-body .alert span {
+    color: var(--text-color);
+}
+
+
+.modal-footer {
+    padding: 1rem 2rem 2rem;
+}
+
+.modal-footer .btn {
+    background: linear-gradient(135deg, var(--highlight-color) 0%, var(--highlight-color-light) 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 30px;
+    font-family: var(--secondary-font);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(139, 139, 174, 0.3);
+}
+
+.modal-footer .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 139, 174, 0.4);
+    background: linear-gradient(135deg, var(--highlight-color-light) 0%, var(--highlight-color) 100%);
+}
+
+
+
+
 
 
 /* Media queries */
+/* Extra small devices */
+@media screen and (min-width:768px) {
+    #game-controls .btn[data-direction="ArrowLeft"] {
+        left: 35%;
+    }
 
-/* Extra Small Devices (phones, less than 576px) */
-@media (max-width: 575.98px) {
-    .text-content-section {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-    }
-    
-    .text-content-section .section-heading {
-        font-size: 1.5rem;
-    }
-    
-    .feature-item h4 {
-        font-size: 1.2rem;
+    #game-controls .btn[data-direction="ArrowRight"] {
+        right: 35%;
     }
 }
 
-/* Small Devices (phones and small tablets, less than 768px) */
-@media (max-width: 767.98px) {
-    /* Text content section styles */
-    .text-content-section {
-        padding-top: 2.5rem;
-        padding-bottom: 2.5rem;
+/* Large Devices (desktops, 992px and larger) */
+@media screen and (min-width:992px) {
+    #game-controls .btn[data-direction="ArrowLeft"] {
+        left: 36%;
     }
-    
-    .text-content-section .section-heading {
-        font-size: 1.75rem;
+
+    #game-controls .btn[data-direction="ArrowRight"] {
+        right: 36%;
     }
-    
-    .text-content-section .lead {
-        font-size: 1.1rem;
+
+    #game-section .row {
+        width: 100%;
+        position: relative;
     }
-    
-    /* Feature grid styles */
-    .feature-cube {
-        margin-bottom: 1.5rem;
+
+    #game-master-keys,
+    #game-stats {
+        position: absolute;
+        top: 42.5%;
+        width: 20%;
+        border-radius: 1rem;
     }
-    
-    .feature-grid-row {
-        margin-bottom: 0;
+
+    #game-master-keys {
+        left: 8%;
     }
-    
-    .feature-item {
-        padding: 1.5rem;
-    }
-    
-    .butterfly-icon {
-        width: 60px;
-        height: 60px;
+
+    #game-stats {
+        right: 8%;
     }
 }
 
-/* Medium Devices (tablets, 768px to 991.98px) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-    .feature-item {
-        padding: 1.75rem;
+/* Extra large devices (larger than 1400px) */
+@media screen and (min-width:1400px) {
+    #game-controls .btn[data-direction="ArrowLeft"] {
+        left: 37%;
     }
-    
-    .feature-text {
-        font-size: 1rem;
-    }
-    
-    .text-content-section {
-        padding: 3.5rem 1.5rem;
-    }
-}
 
-/* Large Devices (desktops, 992px to 1199.98px) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-    .text-content-section {
-        padding: 4.5rem 2rem;
-    }
-    
-    .feature-item {
-        padding: 2rem;
-    }
-}
-
-/* Extra Large Devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-    .text-content-section {
-        padding: 5rem 2.5rem;
-    }
-    
-    .feature-grid-row {
-        margin-bottom: 2.5rem;
+    #game-controls .btn[data-direction="ArrowRight"] {
+        right: 37%;
     }
 }
