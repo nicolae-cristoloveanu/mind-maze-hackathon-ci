@@ -269,8 +269,8 @@ function positionPlayer(direction, openDoor = false) {
       );
       // Only move if target cell exists
       if (nextPlayerCell) {
-        if (nextPlayerCell.classList.contains("maze-door") && !nextPlayerCell.classList.contains("maze-door-open") && !openDoor) {
-          // Check if next position has Trivia door and if it should be opened (only for closed doors)
+        if (nextPlayerCell.classList.contains("maze-door") && !openDoor) {
+          // Check if next position has Trivia door and if it should be opened
           status = "checkKey";
         } else {
           // Move player to new position
@@ -568,8 +568,6 @@ main();
       checkKeyEvent.detail.lastKeyPressed = "";
       checkKeyEvent.detail.status = "";
     }
-    
-    });
 
   // Add event listeners for buttons
   buttons = document.querySelectorAll("button");
@@ -624,142 +622,9 @@ main();
         gameStart(gameState);
       } else if(event.currentTarget.getAttribute("data-type")==="new-game"){
         console.log(`DEBUG: Start new game`);
-        gameStart(gameState); // Restart the game with a new maze
+        //TODO: Redirect to intro section
       }
     });
   });
-
-
-  
-  // Fetch trivia questions from Open Trivia DB (moved from inside event listener)
-  async function fetchTriviaQuestions(difficulty = "easy", numQuestions = 1) {
-    try {
-      const response = await fetch(`https://opentdb.com/api.php?amount=${numQuestions}&difficulty=${difficulty}&type=multiple`);
-      const data = await response.json();
-
-      return data.results.map((q) => {
-        const options = [...q.incorrect_answers];
-        const correctIndex = Math.floor(Math.random() * (options.length + 1));
-        options.splice(correctIndex, 0, q.correct_answer);
-
-        return {
-          question: q.question,
-          options,
-          answer: q.correct_answer,
-          difficulty: q.difficulty,
-        };
-      });
-    } catch (error) {
-      console.error("Failed to fetch trivia questions:", error);
-      return [];
-    }
-  }
-
-  // Function to populate modal with trivia question
-  async function populateTriviaModal() {
-    const questions = await fetchTriviaQuestions("easy", 1);
-    
-    if (questions && questions.length > 0) {
-      const questionData = questions[0];
-      
-      // Update question text
-      const questionSpan = document.querySelector("#trivia-modal .alert span");
-      if (questionSpan) {
-        questionSpan.innerHTML = questionData.question;
-      }
-      
-      // Store correct answer on modal for validation
-      const modal = document.querySelector("#trivia-modal");
-      modal.setAttribute("data-correct-answer", questionData.answer);
-      
-      // Update buttons in modal footer
-      const modalFooter = document.querySelector("#trivia-modal .modal-footer");
-      if (modalFooter) {
-        const masterKeyButton = gameState.areKeysLeft() 
-          ? `<button type="button" class="btn" data-bs-dismiss="modal" data-type="masterkey">Use Master Key (${gameState.returnKeysLeft()} left)</button>`
-          : `<button type="button" class="btn" disabled>No Master Keys Left</button>`;
-        
-        modalFooter.innerHTML = `
-          ${questionData.options.map(option => 
-            `<button type="button" class="btn me-2" data-bs-dismiss="modal" data-type="trivia-choice" data-answer="${option}">${option}</button>`
-          ).join('')}
-          ${masterKeyButton}
-        `;
-      }
-    }
-  }
-
-  // Function to handle trivia answer validation
-  function handleTriviaAnswer(selectedAnswer) {
-    const modal = document.querySelector("#trivia-modal");
-    const correctAnswer = modal.getAttribute("data-correct-answer");
-    
-    if (selectedAnswer === correctAnswer) {
-      // Correct answer - treat like "trivia-correct"
-      gameState.incrementCorrect();
-      updateHeadsUpDisplay(gameState);
-      checkKeyEvent.detail.status = "open";
-      document.dispatchEvent(checkKeyEvent);
-      console.log(`DEBUG: Correct answer: ${selectedAnswer}`);
-    } else {
-      // Wrong answer - treat like "trivia-incorrect"
-      updateHeadsUpDisplay(gameState);
-      console.log(`DEBUG: Incorrect answer: ${selectedAnswer}. Correct was: ${correctAnswer}`);
-      console.log(`DEBUG: Incorrect Answer.\nGame End!`);
-      checkKeyEvent.detail.lastKeyPressed = "";
-      checkKeyEvent.detail.status = "";
-      gameState.gameOver = true;
-      gameState.gameOverStatus = "gameLost";
-      gameEnd(gameState);
-    }
-  }
-
-  // Enhanced askTrivia function that calls the original and adds API integration
-  function askTriviaWithAPI() {
-    populateTriviaModal().then(() => {
-      // Get or create modal instance (avoid creating multiple instances)
-      const modalElement = document.querySelector("#trivia-modal");
-      let triviaModal = bootstrap.Modal.getInstance(modalElement);
-      
-      if (!triviaModal) {
-        triviaModal = new bootstrap.Modal(modalElement);
-      }
-      
-      console.log(`DEBUG: Open trivia modal`);
-      triviaModal.show();
-    });
-  }
-
-  // Add event listener for new trivia choice buttons
-  document.addEventListener('click', function(event) {
-    if (event.target.getAttribute('data-type') === 'trivia-choice') {
-      const selectedAnswer = event.target.getAttribute('data-answer');
-      handleTriviaAnswer(selectedAnswer);
-    } else if (event.target.getAttribute('data-type') === 'masterkey') {
-      // Handle master key usage for dynamically created buttons
-      if (gameState.areKeysLeft()) {
-        gameState.useMasterKey();
-        updateHeadsUpDisplay(gameState);
-        console.log(`DEBUG: Master Key used - ${gameState.returnKeysLeft()} master keys left`);
-        checkKeyEvent.detail.status = "open";
-        document.dispatchEvent(checkKeyEvent);
-      } else {
-        console.log(`DEBUG: No master keys left!`);
-        // Optional: Could show a message to the user that no keys are available
-      }
-    }
-  });
-
-  // Override the checkKey event to use the new API-enhanced function
-  document.addEventListener("checkKey", function(event) {
-    if (!event.detail.status) {
-      console.log(`DEBUG: Door detected. Ask Trivia with API to pass.\n Last Key Pressed => ${event.detail.lastKeyPressed}`);
-      askTriviaWithAPI(); // Use enhanced version instead of original
-      event.stopImmediatePropagation(); // Prevent original handler from running
-      event.preventDefault(); // Prevent any default behavior
-    }
-    // If status is "open", don't interfere - let original handler process normally
-  }, true); // Use capture phase to run before the original listener
-
 });
 });
