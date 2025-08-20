@@ -567,7 +567,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // New functions for trivia API integration (added without modifying existing code)
+
   
   // Fetch trivia questions from Open Trivia DB (moved from inside event listener)
   async function fetchTriviaQuestions(difficulty = "easy", numQuestions = 1) {
