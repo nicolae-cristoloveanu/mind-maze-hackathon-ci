@@ -368,7 +368,7 @@ function gameEnd(gameState) {
 function gameStart(gameState){
   // TODO: Read settings from into section
   // Game difficulty settings
-  const mazeSize = 20;
+  const mazeSize = 15;
   const numDoors = 10;
   const numKeys = 5;
 

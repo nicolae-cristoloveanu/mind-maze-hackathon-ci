@@ -103,11 +103,12 @@ p {
 }
 
 .maze-door {
-    background-color: brown;
+    background: url(../images/door-closed.webp) no-repeat center/cover;
 }
 
 .maze-door-open {
     background-color: lightcoral;
+    background: url(../images/door-open.webp) no-repeat center/cover;
 }
 
 .maze-start {
@@ -169,7 +170,6 @@ p {
 } */
 
 #game-section>.container {
-    border: 2px dotted blue;
     height: 80%;
     width: 90%;
     display: flex;
@@ -213,7 +213,6 @@ p {
     border: 1px solid coral;
     margin: 0.5rem 0;
     border-radius: 0.5rem;
-    /* background-color: var(--highlight-color-light-translucent); */
     position: relative;
 }
 
@@ -241,6 +240,7 @@ p {
     padding: 0;
     margin: 0;
     position: absolute;
+    /* background-color: var(--secondary-color); */
 }
 
 #game-controls .btn[data-direction="ArrowLeft"] {
