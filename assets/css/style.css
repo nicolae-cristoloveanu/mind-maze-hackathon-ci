@@ -270,56 +270,6 @@ p {
     flex-direction: column;
 }
 
-/* Navbar */
-#navbar {
-    background-color: #F78E69;
-    position: sticky;
-    top: 0;
-    z-index: 1030;
-    /* Ensures navbar stays above other content */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow for depth when scrolling */
-}
-
-#navbar .logo {
-
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    padding: 0.5rem;
-
-}
-
-#navbar .nav-link {
-    color: var(--text-color) !important;
-    font-size: 1.3rem;
-    font-weight: 500;
-    padding: 0.75rem 1rem;
-    transition: color 0.3s ease;
-}
-
-#navbar .nav-link:hover {
-    color: var(--highlight-color) !important;
-}
-
-#navbar .nav-link.active {
-    color: var(--highlight-color-light) !important;
-    font-weight: 600;
-}
-
-#navbar .navbar-brand {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--text-color);
-}
-
-#navbar .navbar-toggler {
-
-    border-color: var(--text-color);
-
-}
-
 /* Feature Section */
 
 .feature-section {
@@ -452,174 +402,159 @@ p {
 
 
 
-/* Footer Styles */
-
-.site-footer {
-    margin: 2rem auto;
-    padding: 3rem 1.5rem;
-    max-width: 90%;
-    border: 1px solid var(--border-light-cyan);
-    border-radius: 1.5rem;
-    position: relative;
-    /* Direct background image application similar to header */
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url('../images/tree.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    font-family: var(--secondary-font);
-    color: rgba(255, 255, 255, 0.9);
-    /* Light text for readability over dark background */
-}
-
-.site-footer h5 {
-    font-family: var(--primary-font);
-    font-weight: 700;
-    color: #ffffff;
-    /* White headings for contrast against background */
-    margin-bottom: 1.5rem;
-}
-
-.site-footer p {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.9);
-    /* Light text for readability */
-}
-
-.site-footer .footer-links {
-    list-style: none;
-    padding-left: 0;
-}
-
-.site-footer .footer-links li {
-    margin-bottom: 0.75rem;
-}
-
-.site-footer .footer-links a {
-    color: rgba(255, 255, 255, 0.8);
-    /* Light links for readability */
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.site-footer .footer-links a:hover {
-    color: var(--primary-color);
-    /* Light cyan on hover for contrast */
-}
-
-.site-footer .social-icons a {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    margin-right: 0.5rem;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    /* Semi-transparent background */
-    color: #ffffff;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.site-footer .social-icons a:hover {
-    background-color: var(--primary-color);
-    /* Light cyan background on hover */
-    color: var(--text-color);
-}
-
-.site-footer .copyright-text {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    /* Light border for separation */
-    padding-top: 2rem;
-    margin-top: 2rem;
-    font-size: 0.9rem;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.7);
-    /* Subtle light text for copyright */
-}
-
-/* Modal Styles - Testing */
+/* Modal Styles - Medieval/Fantasy Theme */
 .modal-content {
     border-radius: 25px;
-    border: 3px solid var(--border-light-cyan);
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 8px solid #8B4513;
+    background: linear-gradient(135deg, #F4E4BC 0%, #E8D5A3 50%, #DCC48A 100%);
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
 
+/* Decorative border pattern */
+.modal-content::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background: repeating-linear-gradient(
+        0deg,
+        #654321 0px,
+        #8B4513 4px,
+        #A0522D 8px,
+        #8B4513 12px,
+        #654321 16px
+    );
+    border-radius: 29px;
+    z-index: -1;
+}
 
 .modal-header {
     padding: 2rem 2rem 1rem;
+    border-bottom: 3px solid #8B4513;
+    background: linear-gradient(135deg, #F4E4BC 0%, #E8D5A3 100%);
+    border-radius: 20px 20px 0 0;
 }
 
 .modal-title {
-    font-family: var(--secondary-font);
-    color: var(--text-color);
-    font-weight: 600;
+    font-family: 'Cinzel', serif;
+    color: #4A3C2A;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-size: 1.5rem;
+    text-align: center;
 }
 
 .modal-title .fas.fa-leaf {
-    color: var(--highlight-color-light);
+    color: #8B4513;
 }
 
 .modal-body {
-    padding: 1rem 2rem;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, #F4E4BC 0%, #E8D5A3 100%);
 }
 
 .modal-body p {
-    font-family: var(--primary-font);
-    color: var(--text-color);
+    font-family: 'Cinzel', serif;
+    color: #4A3C2A;
     line-height: 1.6;
+    font-size: 1.1rem;
 }
 
 .modal-body .lead {
-    font-family: var(--primary-font);
-    color: var(--text-color);
+    font-family: 'Cinzel', serif;
+    color: #4A3C2A;
+    font-weight: 600;
 }
 
 .modal-body .alert {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(135deg, #E8D5A3 0%, #DCC48A 100%);
     border-radius: 15px;
-    border: 2px solid var(--border-light-blue);
+    border: 2px solid #8B4513;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .modal-body .alert strong,
 .modal-body .alert span {
-    color: var(--text-color);
+    color: #4A3C2A;
 }
 
+/* Trivia Question Styling */
+.modal-body .trivia-question {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #4A3C2A;
+    text-align: center;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: linear-gradient(135deg, #F4E4BC 0%, #E8D5A3 100%);
+    border: 2px solid #8B4513;
+    border-radius: 15px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    line-height: 1.4;
+}
+
+/* Alternative styling for question paragraphs */
+.modal-body p.question,
+.modal-body .lead.question {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #4A3C2A;
+    text-align: center;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: linear-gradient(135deg, #F4E4BC 0%, #E8D5A3 100%);
+    border: 2px solid #8B4513;
+    border-radius: 15px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    line-height: 1.4;
+}
 
 .modal-footer {
     padding: 1rem 2rem 2rem;
+    border-top: 3px solid #8B4513;
+    background: linear-gradient(135deg, #F4E4BC 0%, #E8D5A3 100%);
+    border-radius: 0 0 20px 20px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
 }
 
 .modal-footer .btn {
-    background: linear-gradient(135deg, var(--highlight-color) 0%, var(--highlight-color-light) 100%);
-    color: white;
-    border: none;
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #8B4513 100%);
+    color: #F4E4BC;
+    border: 2px solid #654321;
     border-radius: 25px;
     padding: 12px 30px;
-    font-family: var(--secondary-font);
-    font-weight: 500;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(139, 139, 174, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    margin: 8px 15px;
 }
 
 .modal-footer .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(139, 139, 174, 0.4);
-    background: linear-gradient(135deg, var(--highlight-color-light) 0%, var(--highlight-color) 100%);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, #A0522D 0%, #CD853F 50%, #A0522D 100%);
+    border-color: #8B4513;
 }
 
-/* Wizard Image in Trivia Modal */
+/* Wizard Image in Trivia Modal - Medieval Theme */
 .wizard-image-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 1rem 0;
 }
 
 .wizard-image {
@@ -627,15 +562,43 @@ p {
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid var(--highlight-color);
-    box-shadow: 0 4px 15px rgba(139, 139, 174, 0.3);
+    border: 4px solid #8B4513;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
     transition: all 0.3s ease;
+    background: #F4E4BC;
 }
 
 .wizard-image:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(139, 139, 174, 0.4);
-    border-color: var(--highlight-color-light);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    border-color: #A0522D;
+}
+
+/* Modal backdrop for medieval atmosphere */
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-backdrop.show {
+    opacity: 0.8;
+}
+
+/* Close button styling */
+.modal-header .btn-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #8B4513;
+    opacity: 1;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+}
+
+.modal-header .btn-close:hover {
+    color: #A0522D;
+    opacity: 1;
 }
 
 
