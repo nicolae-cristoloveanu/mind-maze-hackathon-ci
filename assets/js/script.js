@@ -163,7 +163,7 @@ function drawMaze(maze, solution = null) {
   const mazeSize = maze["cells"].length;
 
   const mazeArea = document.querySelector("#maze-area");
-  mazeArea.innerHTML="";
+  mazeArea.innerHTML = "";
   mazeArea.setAttribute("data-maze-size", mazeSize);
   for (let row = 0; row < mazeSize; row++) {
     const mazeRow = document.createElement("div");
@@ -346,7 +346,7 @@ function updateHeadsUpDisplay(gameState) {
 
 /**
  * Function to handle game end
- * @param {object} gameState 
+ * @param {object} gameState
  */
 function gameEnd(gameState) {
   console.log(`DEBUG: Open Game End modal`);
@@ -356,16 +356,18 @@ function gameEnd(gameState) {
   if (gameState.gameOverStatus === "gameWon") {
     document.querySelector("#game-end-modal .modal-title").innerHTML =
       '<i class="fa-solid fa-graduation-cap"></i>Congratulations!!!';
-    document.querySelector("#game-end-modal .modal-body .lead").innerHTML ='You completed the mission!!!';
+    document.querySelector("#game-end-modal .modal-body .lead").innerHTML =
+      "You completed the mission!!!";
   } else if (gameState.gameOverStatus === "gameLost") {
     document.querySelector("#game-end-modal .modal-title").innerHTML =
       '<i class="fa-solid fa-circle-exclamation"></i>Commiserations!!!';
-    document.querySelector("#game-end-modal .modal-body .lead").innerHTML ='You are locked. Thou shall not pass!!!';
+    document.querySelector("#game-end-modal .modal-body .lead").innerHTML =
+      "You are locked. Thou shall not pass!!!";
   }
   gameEndModal.show();
 }
 
-function gameStart(gameState){
+function gameStart(gameState) {
   // TODO: Read settings from into section
   // Game difficulty settings
   const mazeSize = 15;
@@ -377,7 +379,7 @@ function gameStart(gameState){
   // CSS then uses this to responsively scale the maze cell width depending
   // on viewport width and height
   document.documentElement.style.setProperty("--maze-dimension", mazeSize);
-  
+
   // Game setup
   const maze = generateMazeMap(mazeSize, mazeSize);
   console.log("DEBUG:maze=>\n");
@@ -406,7 +408,6 @@ function gameStart(gameState){
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-
   // Key bindings for keyboard control
   const keyDirectionMap = {
     ArrowUp: "UP",
@@ -533,7 +534,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Add event listeners for buttons
-  buttons = document.querySelectorAll("button");
+  const buttons = document.querySelectorAll("button");
   buttons.forEach((button) => {
     button.addEventListener("click", (event) => {
       // Functionality based on button clicked
@@ -580,13 +581,31 @@ document.addEventListener("DOMContentLoaded", function () {
           gameState.gameOverStatus = "gameWon";
           gameEnd(gameState);
         }
-      } else if(event.currentTarget.getAttribute("data-type") === "play-again"){
+      } else if (
+        event.currentTarget.getAttribute("data-type") === "play-again"
+      ) {
         console.log(`DEBUG: Play again`);
         gameStart(gameState);
-      } else if(event.currentTarget.getAttribute("data-type")==="new-game"){
+      } else if (event.currentTarget.getAttribute("data-type") === "new-game") {
         console.log(`DEBUG: Start new game`);
         //TODO: Redirect to intro section
       }
+      // Add event listeners to remove focus for bootstrap modals triggered
+      // programmatically 
+      if (button.hasAttribute("data-bs-dismiss")) {
+        const btn = document.querySelector("button[data-direction='ArrowUp']");
+        btn.focus();
+      }
+    });
+  });
+
+  // Add event listeners to remove focus for bootstrap modals triggered
+  // programmatically
+  const modals = document.querySelectorAll(".modal");
+  modals.forEach((modal) => {
+    modal.addEventListener("hide.bs.modal", function () {
+      const btn = document.querySelector("button[data-direction='ArrowUp']");
+      btn.focus();
     });
   });
 });
