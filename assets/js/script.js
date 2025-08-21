@@ -587,8 +587,6 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 
-  // gameStart(gameState);
-
   // Add event listener for Key presses
   document.addEventListener("keydown", (event) => {
     if (Object.keys(keyDirectionMap).includes(event.key)) {
