@@ -153,7 +153,7 @@
                 <div class="modal-header border-0 text-center">
                     <h5 class="modal-title w-100" id="triviaModalLabel">
                         <i class="fas fa-question-circle me-2"></i>
-                        Thou Shall Not Pass!
+                    A challenge awaits you at this door.
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -161,10 +161,12 @@
                     <div class="wizard-image-container mb-3">
                         <img src="assets/images/wizard.webp" alt="Wizard Guardian" class="wizard-image">
                     </div>
-                    <p class="lead mb-3">A challenge awaits you at this door.</p>
-                    <p>Do you know the answer to this trivia question? Choose wisely, as your knowledge will determine
+                    <p class="lead mb-3">
+                    Do you know the answer to this trivia question?
+                    </p>
+                    <p> Choose wisely, as your knowledge will determine
                         your path forward through the maze.</p>
-                    <p class="mb-3">Remember, you have master keys available if you find yourself in need of assistance
+                    <p class="mb-3">Remember, you have master keys available for assistance
                         on your journey.</p>
                     <div class="alert border-0">
                         <strong>Challenge Question:</strong> <span>This is where the trivia question will appear when
@@ -172,11 +174,14 @@
                     </div>
                 </div>
                 <div class="modal-footer border-0 justify-content-center">
-                    <button type="button" class="btn me-2" data-bs-dismiss="modal" data-type="trivia-correct">Correct
-                        Answer</button>
-                    <button type="button" class="btn me-2" data-bs-dismiss="modal" data-type="trivia-incorrect">Wrong
-                        Answer</button>
-                    <button type="button" class="btn" data-bs-dismiss="modal" data-type="masterkey">Use Master
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 trivia-options">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="trivia-options"></div> -->
+                    <button type="button" class="btn btn-master-key" data-bs-dismiss="modal" data-type="masterkey">Use Master
                         Key</button>
                 </div>
             </div>

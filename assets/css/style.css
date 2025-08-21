@@ -314,7 +314,7 @@ p {
     padding: 0;
 }
 
-#game-stats .row{
+#game-stats .row {
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
@@ -324,7 +324,7 @@ p {
     /* margin: 0.5rem; */
     display: flex;
     justify-content: center;
-    height:20%;
+    height: 20%;
 }
 
 #game-controls .btn {
@@ -571,6 +571,22 @@ p {
     background: var(--fable-btn-hover-bg);
 }
 
+.modal-footer .trivia-options {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.trivia-options>.btn {
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.modal-footer .btn.btn-master-key {
+    background: var(--fable-primary-color);
+}
+
 /* Wizard Image in Trivia Modal */
 .wizard-image-container {
     display: flex;
@@ -710,6 +726,7 @@ p {
 /* Media queries */
 /* Extra small devices */
 @media screen and (min-width:768px) {
+
     #intro-buttons>button,
     #game-settings {
         width: 40%;
@@ -725,6 +742,10 @@ p {
 
     #game-controls .btn[data-direction="ArrowRight"] {
         right: 35%;
+    }
+
+    .trivia-options>.btn {
+        width: 48%;
     }
 }
 
@@ -752,11 +773,11 @@ p {
     }
 
     #game-master-keys {
-        left: 8%;
+        left: 5%;
     }
 
     #game-stats {
-        right: 8%;
+        right: 5%;
     }
 }
 
