@@ -1,10 +1,10 @@
 /* Google Fonts import */
-@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Cinzel:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Gentium+Plus:ital,wght@0,400;0,700;1,400;1,700&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 :root {
 
     /* Fonts */
-    --primary-font: 'Figtree', sans-serif;
+    /* --primary-font: 'Figtree', sans-serif; */
     --secondary-font: 'Montserrat', sans-serif;
 
 
@@ -20,10 +20,6 @@
     --text-color: #5D675B;
     /* dark teal */
 
-    --primary-color-translucent: rgba(247,239,153,0.5);
-    --secondary-color-translucent: rgba(171,225,136,0.5);
-    --highlight-color-light-translucent: rgba(241, 187, 135, 0.65);
-
     /* Light border colors for sections */
     --border-light-cyan: rgba(197, 255, 253, 0.3);
     --border-light-blue: rgba(136, 217, 230, 0.3);
@@ -32,6 +28,23 @@
     /* Maze variables */
     --wall-style: 2px solid black;
     --maze-cell-width: calc(min(80vw, 0.75*50vh)/var(--maze-dimension));
+
+    /* Fable theme styling */
+    --fable-primary-color: #8B4513;
+    --fable-highlight-color: #DAE6B0;
+    --fable-secondary-highlight-color: #DAA520;
+    --fable-text-color: black;
+
+    --fable-primary-font: 'Cinzel', 'Times New Roman', serif;
+    --fable-text-font: "Gentium Plus", serif;
+
+    --fable-panel-bg: rgba(244, 241, 232, 0.7);
+    --fable-modal-bg: rgba(244, 241, 232);
+    --fable-panel-border: 1px solid #8b4513;
+
+    --fable-btn-bg: linear-gradient(145deg, #4b6fd1 0%, #2c4079 100%);
+    --fable-btn-hover-bg: linear-gradient(145deg, #5CA0FF 0%, #4b6fd1 100%);
+    --fable-btn-border: 1px solid #16213e;
 }
 
 /* Global Styles */
@@ -40,28 +53,28 @@
 }
 
 body {
-    font-family: var(--primary-font);
-    font-size: 1rem;
+    font-family: var(--fable-text-font);
+    font-size: 0.8rem;
     line-height: 1.6;
-    color: var(--text-color);
+    color: var(--fable-text-color);
 }
 
 h1,
 h2,
 h3 {
-    font-family: var(--secondary-font);
+    font-family: var(--fable-primary-font);
     font-weight: 700;
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     line-height: 1.2;
     text-transform: uppercase;
-    color: var(--primary-color);
+    color: var(--fable-text-color);
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: 1rem;
     line-height: 1.3;
     text-transform: uppercase;
 }
@@ -103,19 +116,20 @@ p {
 }
 
 .maze-door {
-    background-color: brown;
+    background: url(../images/door-closed.webp) no-repeat center/contain;
 }
 
 .maze-door-open {
     background-color: lightcoral;
+    background: url(../images/door-open.webp) no-repeat center/contain;
 }
 
 .maze-start {
-    background: url(../images/maze-start.png) no-repeat center/cover;
+    background: url(../images/maze-start.png) no-repeat center/contain;
 }
 
 .maze-end {
-    background: url(../images/checkered-flag.png) no-repeat center/cover;
+    background: url(../images/checkered-flag.png) no-repeat center/contain;
 }
 
 .wall-top {
@@ -150,7 +164,6 @@ p {
 }
 
 .section-content {
-    /* padding: 6rem 0; */
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -163,22 +176,108 @@ p {
     border-radius: 50%;
 }
 
-/* Puzzle section */
-/* #game-section, #maze-exploration {
-    transition: background-color 0.3s ease;
-} */
+.btn {
+    background: var(--fable-btn-bg);
+    border: var(--fable-btn-border);
+    border-radius: 1.5rem;
+    color: #f4f1e8;
+    font-weight: 900;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
 
+.btn:hover {
+    background: var(--fable-btn-hover-bg);
+    /* background: linear-gradient(145deg, #ffd700 0%, #daa520 100%); */
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 12px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.hide {
+    display: none;
+}
+
+/* Intro section */
+#intro>.container {
+    height: 60%;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#intro .row {
+    height: 100%;
+    width: 100%;
+}
+
+#intro-hero,
+#intro-buttons,
+#intro-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#intro-hero,
+#intro-buttons {
+    height: 40%;
+}
+
+
+#intro-buttons {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#intro-buttons>button {
+    width: 40%;
+}
+
+#intro-buttons>button:first-child {
+    width: 80%;
+    background: var(--fable-primary-color);
+}
+
+#game-settings {
+    width: 80%;
+    background-color: rgba(218, 230, 176, 0.25);
+    border: var(--fable-panel-border);
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0.25rem;
+    text-align: center;
+    font-weight: 600;
+    color: white;
+}
+
+#game-settings>div:first-of-type {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Games section */
 #game-section>.container {
     height: 80%;
     width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(255, 255, 255, 0.01);
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
 #game-section .row {
@@ -193,45 +292,39 @@ p {
 
 #game-section #section-heading {
     height: 10%;
-    /* border: 2px dotted coral; */
 }
 
 #game-section #game-area {
     height: 50%;
-    /* border: 2px dotted coral; */
 }
 
 #maze-area {
-    /* border: 2px dotted green; */
-    width: calc(attr(data-maze-size) * var(var(--maze-cell-width)));
-    /* background-color: rgba(255, 255, 255, 0.5); */
-    /* backdrop-filter: blur(2px); */
+    width: calc(attr(data-maze-size) * var(--maze-cell-width));
 }
 
 #game-controls {
     height: 22%;
-    border: 1px solid coral;
     margin: 0.5rem 0;
-    border-radius: 0.5rem;
-    /* background-color: var(--highlight-color-light-translucent); */
     position: relative;
 }
 
+#game-stats,
 #game-master-keys {
-    height: 15%;
-    border: 2px solid var(--primary-color);
-    background-color: var(--primary-color-translucent);
-    backdrop-filter: blur(1px);
-    border-bottom-left-radius: 0.5rem;
+    height: 14%;
+    padding: 0;
 }
 
-#game-stats {
-    height: 15%;
-    border: 2px solid var(--primary-color);
-    background-color: var(--primary-color-translucent);
-    backdrop-filter: blur(1px);
-    border-bottom-right-radius: 0.5rem;
+#game-stats .row {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
 
+#game-stats span {
+    /* margin: 0.5rem; */
+    display: flex;
+    justify-content: center;
+    height: 20%;
 }
 
 #game-controls .btn {
@@ -272,7 +365,7 @@ p {
 
 /* Navbar */
 #navbar {
-    background-color: #F78E69;
+    background-color: var(--fable-primary-color);
     position: sticky;
     top: 0;
     z-index: 1030;
@@ -282,17 +375,15 @@ p {
 }
 
 #navbar .logo {
-
     width: 60px;
     height: 60px;
     border-radius: 50%;
     object-fit: cover;
     padding: 0.5rem;
-
 }
 
 #navbar .nav-link {
-    color: var(--text-color) !important;
+    color: var(--fable-text-color) !important;
     font-size: 1.3rem;
     font-weight: 500;
     padding: 0.75rem 1rem;
@@ -311,146 +402,12 @@ p {
 #navbar .navbar-brand {
     font-size: 1.4rem;
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--fable-text-color);
 }
 
 #navbar .navbar-toggler {
-
-    border-color: var(--text-color);
-
+    border-color: var(--fable-text-color);
 }
-
-/* Feature Section */
-
-.feature-section {
-    padding: 6rem 0;
-    position: relative;
-    color: #ffffff;
-    /* Direct background image application */
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-        url('../images/tree.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
-.feature-grid-row {
-    margin-bottom: 2rem;
-}
-
-.feature-cube {
-    padding: 1.5rem;
-    transition: transform 0.3s ease;
-}
-
-.feature-cube:hover {
-    transform: translateY(-5px);
-}
-
-.feature-item {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 2rem;
-    border-radius: 10px;
-    height: 100%;
-    font-family: var(--secondary-font);
-    color: var(--primary-color);
-    font-weight: bold;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.feature-item:hover {
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.feature-item h4 {
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-    text-align: center;
-}
-
-.feature-text {
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.6;
-    font-size: 1.05rem;
-    text-align: center;
-}
-
-.butterfly-icon-container {
-    position: absolute;
-    bottom: -25px;
-    right: -25px;
-    opacity: 0.3;
-    transition: opacity 0.3s ease;
-}
-
-.feature-item:hover .butterfly-icon-container {
-    opacity: 0.6;
-}
-
-.butterfly-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-
-
-/* Content Sections */
-
-.text-content-section {
-    margin: 2rem auto;
-    padding: 3rem 1.5rem;
-    max-width: 90%;
-    border: 1px solid var(--border-light-cyan);
-    border-radius: 1.5rem;
-    background-color: var(--primary-color);
-    font-family: var(--secondary-font);
-    color: var(--text-color);
-}
-
-
-
-/* Text content Section - Nested Styles */
-
-.text-content-section .row {
-    align-items: center;
-}
-
-.text-content-section .section-heading {
-    font-family: var(--primary-font);
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    font-size: 2.25rem;
-    color: var(--text-color);
-}
-
-.text-content-section .lead {
-    font-size: 1.3rem;
-    color: var(--highlight-color-light);
-    margin-bottom: 2rem;
-    font-weight: 400;
-}
-
-.text-content-section p {
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-    font-size: 1.05rem;
-}
-
-
-
-
-
-
 
 /* Footer Styles */
 
@@ -463,8 +420,7 @@ p {
     position: relative;
     /* Direct background image application similar to header */
     background-image:
-        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url('../images/tree.jpg');
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -546,19 +502,18 @@ p {
 
 /* Modal Styles - Testing */
 .modal-content {
-    border-radius: 25px;
+    border-radius: 1rem;
     border: 3px solid var(--border-light-cyan);
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: var(--fable-modal-bg);
 }
-
 
 .modal-header {
     padding: 2rem 2rem 1rem;
 }
 
 .modal-title {
-    font-family: var(--secondary-font);
-    color: var(--text-color);
+    font-family: var(--fable-primary-font);
+    color: var(--fable-text-color);
     font-weight: 600;
 }
 
@@ -571,25 +526,25 @@ p {
 }
 
 .modal-body p {
-    font-family: var(--primary-font);
-    color: var(--text-color);
+    font-family: var(--fable-text-font);
+    color: var(--fable-text-color);
     line-height: 1.6;
 }
 
 .modal-body .lead {
-    font-family: var(--primary-font);
-    color: var(--text-color);
+    font-family: var(--fable-primary-font);
+    color: var(--fable-text-color);
 }
 
 .modal-body .alert {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(135deg, var(--fable-highlight-color) 0%, var(--fable-secondary-highlight-color) 100%);
     border-radius: 15px;
-    border: 2px solid var(--border-light-blue);
+    border: 2px solid var(--fable-primary-color);
 }
 
 .modal-body .alert strong,
 .modal-body .alert span {
-    color: var(--text-color);
+    color: var(--fable-text-color);
 }
 
 
@@ -598,12 +553,12 @@ p {
 }
 
 .modal-footer .btn {
-    background: linear-gradient(135deg, var(--highlight-color) 0%, var(--highlight-color-light) 100%);
+    background: var(--fable-btn-bg);
     color: white;
-    border: none;
+    border: var(--fable-btn-border);
     border-radius: 25px;
     padding: 12px 30px;
-    font-family: var(--secondary-font);
+    font-family: var(--fable-text-font);
     font-weight: 500;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(139, 139, 174, 0.3);
@@ -612,7 +567,24 @@ p {
 .modal-footer .btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(139, 139, 174, 0.4);
-    background: linear-gradient(135deg, var(--highlight-color-light) 0%, var(--highlight-color) 100%);
+    /* background: linear-gradient(135deg, var(--highlight-color-light) 0%, var(--highlight-color) 100%); */
+    background: var(--fable-btn-hover-bg);
+}
+
+.modal-footer .trivia-options {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.trivia-options>.btn {
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.modal-footer .btn.btn-master-key {
+    background: var(--fable-primary-color);
 }
 
 /* Wizard Image in Trivia Modal */
@@ -627,7 +599,7 @@ p {
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid var(--highlight-color);
+    border: 3px solid var(--fable-primary-color);
     box-shadow: 0 4px 15px rgba(139, 139, 174, 0.3);
     transition: all 0.3s ease;
 }
@@ -638,46 +610,26 @@ p {
     border-color: var(--highlight-color-light);
 }
 
-
-
-
-
-
 /* =================================
-   FABLE-INSPIRED THEME (EXPERIMENTAL)
+   FABLE-INSPIRED THEME
    ================================= */
 
 /* Enable this theme by adding class "fable-theme" to body */
-.fable-theme #game-section > .container {
-    background: rgba(244, 241, 232, 0.02);
-    border: 1px solid rgba(139, 69, 19, 0.08);
+.fable-theme #intro>.container,
+.fable-theme #game-section>.container {
+    background: rgba(244, 241, 232, 0.1);
+    border: 1px solid rgba(139, 69, 19, 0.7);
     backdrop-filter: blur(3px);
-    box-shadow: 
-        0 2px 8px rgba(139, 69, 19, 0.05),
-        inset 0 1px 0 rgba(218, 165, 32, 0.05);
-    border-radius: 20px;
+    box-shadow:
+        0 2px 8px rgba(139, 69, 19, 0.5),
+        inset 0 1px 0 rgba(218, 165, 32, 0.5);
+    border-radius: 1rem;
     position: relative;
-}
-
-/* Subtle glass texture overlay */
-.fable-theme #game-section > .container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle at 25% 25%, rgba(218, 165, 32, 0.01) 0%, transparent 50%),
-        radial-gradient(circle at 75% 75%, rgba(139, 69, 19, 0.01) 0%, transparent 50%);
-    border-radius: 20px;
-    pointer-events: none;
 }
 
 /* Medieval heading styling */
 .fable-theme #section-heading h2 {
-    font-family: 'Cinzel', 'Times New Roman', serif;
-    color: #5d4037;
+    font-family: var(--fable-primary-font);
     text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.3);
     font-weight: 700;
     letter-spacing: 2px;
@@ -695,10 +647,9 @@ p {
 
 /* Maze area with ornate border */
 .fable-theme #maze-area {
-    /* background: linear-gradient(135deg, #faf8f3 0%, #f0ead6 100%); */
-    border: 4px solid #8b4513;
-    border-radius: 10px;
-    box-shadow: 
+    border: 3px solid #8b4513;
+    border-radius: 0.5rem;
+    box-shadow:
         inset 0 0 15px rgba(139, 69, 19, 0.2),
         0 5px 15px rgba(0, 0, 0, 0.3);
     position: relative;
@@ -709,61 +660,34 @@ p {
 .fable-theme #maze-area::before {
     content: '';
     position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
+    inset: -2px;
     background: linear-gradient(45deg, #daa520, #b8860b, #daa520, #b8860b);
-    border-radius: 12px;
+    border-radius: 0.5rem;
     z-index: -1;
 }
 
 /* Control panel styling */
 .fable-theme #game-controls {
-    background: linear-gradient(135deg, #f4f1e8 0%, #e8dcc0 100%);
-    border: 3px solid #8b4513;
+    background: var(--fable-panel-bg);
+    border: var(--fable-panel-border);
     border-radius: 12px;
-    box-shadow: 
+    box-shadow:
         inset 0 0 10px rgba(139, 69, 19, 0.2),
         0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.fable-theme #game-controls .btn {
-    background: linear-gradient(145deg, #daa520 0%, #b8860b 100%);
-    border: 2px solid #8b4513;
-    color: #f4f1e8;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    box-shadow: 
-        0 4px 8px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-}
 
-.fable-theme #game-controls .btn:hover {
-    background: linear-gradient(145deg, #ffd700 0%, #daa520 100%);
-    transform: translateY(-2px);
-    box-shadow: 
-        0 6px 12px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.fable-theme #game-controls .btn:active {
-    transform: translateY(0);
-    box-shadow: 
-        0 2px 4px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
 
 /* Stats and keys panels */
 .fable-theme #game-master-keys,
 .fable-theme #game-stats {
-    background: linear-gradient(135deg, #f4f1e8 0%, #e8dcc0 100%);
-    border: 3px solid #8b4513;
-    border-radius: 8px;
-    box-shadow: 
+    background: var(--fable-panel-bg);
+    border: var(--fable-panel-border);
+    border-radius: 0.5rem;
+    box-shadow:
         inset 0 0 8px rgba(139, 69, 19, 0.2),
         0 3px 8px rgba(0, 0, 0, 0.3);
-    color: #5d4037;
+    color: black;
     font-family: 'Cinzel', 'Times New Roman', serif;
     font-weight: 600;
     text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.2);
@@ -772,11 +696,12 @@ p {
 .fable-theme #game-master-keys .fa-key {
     color: #daa520;
     filter: drop-shadow(1px 1px 2px rgba(139, 69, 19, 0.3));
+    font-size: 0.8rem;
 }
 
 .fable-theme #game-master-keys .fa-key.used-key {
     color: #8b7355;
-    opacity: 0.5;
+    opacity: 1;
 }
 
 /* Enhanced maze cell styling for fable theme */
@@ -785,28 +710,10 @@ p {
     border-width: 1px !important;
 }
 
-.fable-theme .maze-path {
-    background-color: #f5f5dc;
-}
-
-.fable-theme .maze-door {
-    background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
-    position: relative;
-}
-
-.fable-theme .maze-door::before {
-    content: '🚪';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: calc(var(--maze-cell-width) * 0.6);
-}
-
 .fable-theme .player {
-    background: radial-gradient(circle, #ffd700 0%, #daa520 70%, #b8860b 100%);
-    border: 2px solid #8b4513;
-    box-shadow: 
+    background: radial-gradient(circle, #4b6fd1 0%, #365097 70%, #2c4079 100%);
+    border: 2px solid #16213e;
+    box-shadow:
         0 0 10px rgba(255, 215, 0, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
@@ -819,12 +726,26 @@ p {
 /* Media queries */
 /* Extra small devices */
 @media screen and (min-width:768px) {
+
+    #intro-buttons>button,
+    #game-settings {
+        width: 40%;
+    }
+
+    #intro-buttons>button:first-child {
+        width: 60%;
+    }
+
     #game-controls .btn[data-direction="ArrowLeft"] {
         left: 35%;
     }
 
     #game-controls .btn[data-direction="ArrowRight"] {
         right: 35%;
+    }
+
+    .trivia-options>.btn {
+        width: 48%;
     }
 }
 
@@ -852,11 +773,11 @@ p {
     }
 
     #game-master-keys {
-        left: 8%;
+        left: 5%;
     }
 
     #game-stats {
-        right: 8%;
+        right: 5%;
     }
 }
 
