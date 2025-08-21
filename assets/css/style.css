@@ -222,6 +222,10 @@ p {
     width: 100%;
 }
 
+#intro-hero {
+    background: url(../images/wizard.webp) no-repeat center/contain;
+}
+
 #intro-hero,
 #intro-buttons,
 #intro-title {
