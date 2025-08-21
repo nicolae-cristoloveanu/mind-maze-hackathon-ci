@@ -368,11 +368,11 @@ function gameEnd(gameState) {
 }
 
 function gameStart(gameState) {
-  // TODO: Read settings from into section
+  console.log(`DEBUG: Level=>`,gameState.returnLevel());
   // Game difficulty settings
-  const mazeSize = 15;
-  const numDoors = 10;
-  const numKeys = 5;
+  const mazeSize = gameState.gameLevel.mazeSize;
+  const numDoors = gameState.gameLevel.numTrivia;
+  const numKeys = gameState.gameLevel.numKeys;
 
   gameState.reset();
   // Add maze dimension as style property to HTML element
@@ -408,6 +408,13 @@ function gameStart(gameState) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  // Difficulty map
+  const difficultySettings = {
+    1: { level: "easy", mazeSize: 8, numTrivia: 8, numKeys: 5 },
+    2: { level: "medium", mazeSize: 12, numTrivia: 12, numKeys: 5 },
+    3: { level: "hard", mazeSize: 15, numTrivia: 15, numKeys: 5 },
+  };
+
   // Key bindings for keyboard control
   const keyDirectionMap = {
     ArrowUp: "UP",
@@ -481,6 +488,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Game state object
   const gameState = {
+    gameLevel: difficultySettings[1],
     gameOver: false,
     gameOverStatus: "",
     totalKeysAvailable: 0,
@@ -524,6 +532,15 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     returnKeysLeft: function () {
       return this.numMasterKeys;
+    },
+    selectLevel: function (levelSelected) {
+      const validLevelSelected = ["1","2","3"];
+      if (validLevelSelected.includes(levelSelected)) {
+        this.gameLevel = difficultySettings[levelSelected];
+      }
+    },
+    returnLevel: function () {
+      return this.gameLevel;
     },
   };
 
@@ -628,10 +645,17 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(`DEBUG: Go to Intro`);
         document.querySelector("#intro").classList.remove("hide");
         document.querySelector("#game-section").classList.add("hide");
-      } else if(event.currentTarget.getAttribute("data-type") === "game-start"){
+      } else if (
+        event.currentTarget.getAttribute("data-type") === "game-start"
+      ) {
         console.log(`DEBUG: Start new game`);
         document.querySelector("#intro").classList.add("hide");
         document.querySelector("#game-section").classList.remove("hide");
+        // Read difficulty from slider
+        const difficultySlider = document.getElementById("difficulty-slider");
+        const difficultyValue = difficultySlider ? difficultySlider.value : "1";
+        console.log("Selected difficulty:", difficultyValue);
+        gameState.selectLevel(difficultyValue);
         gameStart(gameState);
       }
 
