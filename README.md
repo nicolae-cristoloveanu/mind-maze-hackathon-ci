@@ -1,103 +1,408 @@
 # Mind Maze - Interactive Web Game
 
-![Mind Maze Logo](assets/images/mind-maze.png)
+An engaging, responsive web-based puzzle game that combines maze navigation with trivia challenges, creating a unique blend of spatial reasoning and knowledge-based gameplay for players of all skill levels.
 
-Mind Maze is an engaging, responsive web-based puzzle game that combines maze navigation with trivia challenges. Players must navigate through a maze while answering trivia questions at checkpoints to progress, creating a unique blend of spatial reasoning and knowledge-based gameplay.
+**Live Site:** [https://nicolae-cristoloveanu.github.io/mind-maze-hackathon-ci/](https://nicolae-cristoloveanu.github.io/mind-maze-hackathon-ci/)
 
-## 🎯 Project Objectives
+![Mind Maze Wizard](assets/images/wizard.webp)
 
-### Primary Goals
-- **Engaging Gameplay**: Create an interactive web game that's fun and challenging, playable across desktop, tablet, and mobile devices
-- **Hybrid Mechanics**: Blend puzzle navigation with trivia gameplay where maze progress requires correct answers at checkpoint "doors"
-- **Strategic Elements**: Implement a "master key" mechanic allowing limited skips of difficult trivia challenges
-- **Progress Tracking**: Monitor and display player performance including questions answered, skips used, and completion status
-- **Replayability**: Provide variety through randomized maze layouts and trivia questions each session
-- **Accessibility**: Ensure readable text, clear buttons, and support for both keyboard and touch controls
+![Mind Maze Game](assets/images/mind-maze3.png)
 
-### User Goals
-- **Entertainment**: Have fun while being challenged with maze navigation and trivia questions
-- **Cross-Platform Compatibility**: Play seamlessly on any device without performance or display issues
-- **Intuitive Gameplay**: Understand rules quickly without lengthy instructions
-- **Strategic Decision-Making**: Use master keys strategically to skip difficult questions
-- **Performance Feedback**: Receive clear feedback on correct/incorrect answers, maze progress, and remaining skips
-- **Varied Experience**: Enjoy replay value with randomized content that prevents repetitive gameplay
+![Mind Maze Game](assets/images/mind-maze2.png)
 
-## 🚀 Features
+## 🎮 Recent Updates & Improvements
 
-### Core Gameplay
+### Latest Enhancements
 
-#### Maze Navigation
-- **Movement Controls**: Navigate using keyboard arrows, WASD keys, or touch/swipe controls on mobile
-- **Cross-Platform Input**: Seamless control experience across desktop, tablet, and mobile devices
-- **Objective**: Reach the maze exit to complete the game
+- **Procedural Maze Generation**: Implemented recursive backtracking algorithm for unique, solvable mazes every playthrough
+- **Trivia API Integration**: Connected to [Open Trivia Database](https://opentdb.com/) for dynamic question fetching with multiple categories
+- **Medieval Theme Implementation**: Applied cohesive Fable-inspired design with ornate borders, warm colors, and fantasy aesthetics
+- **Master Key System**: Strategic resource management allowing players to skip difficult questions with limited uses
+- **Responsive Controls**: Dual input support with keyboard (WASD/arrows) and touch controls for mobile devices
+- **Real-time HUD**: Live tracking of master keys, correct answers, and game progress with visual feedback
+- **Modal System**: Bootstrap-powered trivia question display with accessible design patterns
+- **Game State Management**: Comprehensive tracking of player progress, statistics, and win/lose conditions
+- **Cross-platform Compatibility**: Optimized gameplay experience across desktop, tablet, and mobile devices
+- **White Text Accessibility**: Enhanced modal text visibility with improved contrast for better readability
 
-#### Trivia Doors System
-- **Locked Doors**: Strategic tiles throughout the maze that block player progress
-- **Question Challenge**: Each door presents a multiple-choice trivia question
-- **Pass Conditions**: 
-  - Correct answer = door opens immediately
-  - Wrong answer = door remains locked (retry option or use master key)
-- **Interactive Feedback**: Immediate response showing correct/incorrect with answer highlighting
+### AI Development Tools Used
+This project has been developed with assistance from advanced AI tools:
+- **GitHub Copilot**: Used for code completion, debugging assistance, and implementation optimization
+- **ChatGPT/Claude AI**: Assisted with game logic refinement, documentation, and accessibility improvements
 
-#### Master Key Skip Mechanism
-- **Limited Resource**: Fixed number of master keys per game session
-- **Strategic Usage**: Each skip consumes one master key and opens any door instantly
-- **Resource Management**: Players must decide when to use skips vs. attempt answers
+
+## Table Of Contents:
+1. [Project Overview](#project-overview)
+2. [Design & Planning](#design--planning)
+    * [Wireframes](#wireframes)
+    * [User Stories](#user-stories)
+    * [Typography](#typography)
+    * [Colour Scheme](#colour-scheme)
+3. [Features](#features)
+    * [Game Mechanics](#game-mechanics)
+    * [Trivia System](#trivia-system)
+    * [User Interface](#user-interface)
+    * [Responsive Design](#responsive-design)
+4. [Technologies Used](#technologies-used)
+5. [Testing](#testing)
+6. [Deployment](#deployment)
+7. [Credits](#credits)
+
+## Project Overview
+
+Mind Maze is an interactive web-based puzzle game that challenges players to navigate through procedurally generated mazes while answering trivia questions at strategic checkpoints. The game combines spatial reasoning with knowledge-based challenges, creating an engaging experience that tests both navigation skills and general knowledge.
+
+### Key Features:
+- **Procedural Generation**: Every maze is unique, ensuring fresh gameplay experiences
+- **Trivia Integration**: Knowledge-based challenges that gate progress through the maze
+- **Strategic Resource Management**: Master keys provide limited skips for difficult questions
+- **Cross-Platform Gameplay**: Seamless experience across desktop, tablet, and mobile devices
+
+## Design & Planning:
+
+### Wireframes
+
+The game interface was designed with wireframes to establish optimal user experience across different device sizes:
+
+[Wireframe screenshots will be added here]
+
+#### Desktop Layout
+- **Game Area**: Central maze display with surrounding HUD elements
+- **Control Panel**: Directional controls positioned for easy access
+- **Statistics Display**: Master keys and score tracking in dedicated panels
+- **Modal System**: Overlay trivia questions with medieval-themed styling
+
+#### Mobile Layout
+- **Stacked Interface**: Vertical arrangement optimizing touch interaction
+- **Touch Controls**: Large, accessible buttons for directional movement
+- **Responsive Modals**: Full-screen trivia questions for mobile screens
+- **Optimized HUD**: Condensed statistics display for smaller screens
+
+### User Stories
+
+#### 1. As a player, I want to move through a maze so that I can reach the goal.
+**Acceptance Criteria:**
+- Maze is visible on screen
+- Player can move in four directions
+- Player cannot pass through walls
+
+**Atomic Tasks:**
+1. Implement HTML/CSS grid for maze layout
+2. Create JavaScript maze rendering function
+3. Add keyboard controls (arrow keys + WASD)
+4. Add touch/swipe button controls for mobile
+5. Implement wall collision detection
+
+#### 2. As a player, I want to encounter locked doors with trivia questions so that I must answer correctly to progress.
+**Acceptance Criteria:**
+- Locked door tiles appear in maze
+- Reaching a door triggers trivia modal
+- Door opens only if correct answer given
+
+**Atomic Tasks:**
+1. Define door tile positions in maze data
+2. Implement door rendering on grid
+3. Detect collision with door tile
+4. Trigger trivia popup when door reached
+5. Unlock door if trivia answered correctly
+
+#### 3. As a player, I want to use a limited number of master keys so I can skip tough questions.
+**Acceptance Criteria:**
+- Player starts with fixed number of master keys
+- Skip button in trivia modal consumes 1 key
+- Keys count updates on HUD
+
+**Atomic Tasks:**
+1. Add master key count to game state object
+2. Display keys remaining in HUD
+3. Add skip button in trivia modal
+4. Reduce key count when skip used
+5. Allow door to open when skip used
+
+#### 4. As a player, I want immediate feedback after answering a trivia question so I know if I can move forward.
+**Acceptance Criteria:**
+- Correct answer shows 'Correct!' and opens door
+- Incorrect answer shows 'Incorrect!' and highlights correct answer
+
+**Atomic Tasks:**
+1. Add answer validation logic
+2. Style feedback messages in modal
+3. Highlight correct answer after wrong guess
+4. Close trivia modal and open door on correct/skipped answer
+
+#### 5. As a player, I want the game to work smoothly on my phone so that I can play anywhere.
+**Acceptance Criteria:**
+- Maze fits on screen
+- Buttons and text scale well
+- Touch controls work
+
+**Atomic Tasks:**
+1. Use CSS media queries for responsiveness
+2. Adjust HUD layout for mobile
+3. Implement button controls
+4. Test on multiple screen sizes
+
+#### 6. As a player, I want readable text and clear visuals so that I can enjoy the game without strain.
+**Acceptance Criteria:**
+- Fonts readable on all devices
+- Colors high-contrast
+- Buttons large enough for touch
+
+**Atomic Tasks:**
+1. Apply accessible font sizes
+2. Use high-contrast color scheme
+3. Style trivia modal for clarity
+4. Ensure all buttons are touch-friendly
+
+#### 7. As a player, I want an intro screen with game settings and tutorials so that I can understand how to play and adjust the game before starting.
+**Acceptance Criteria:**
+- Intro screen appears before maze starts
+- Player can start new game from intro screen
+- Player can access tutorial/instructions
+- Player can adjust basic settings (e.g., difficulty, maze size, trivia category, sound)
+
+**Atomic Tasks:**
+1. Create intro screen HTML structure
+2. Add "Start Game" button to transition into maze
+3. Add "Tutorial" button with modal explaining rules & controls
+4. Implement settings options (difficulty - should set maze size and trivia question category)
+5. Store chosen settings in game state object
+6. Ensure intro screen is responsive on all devices
+
+#### 8. As a player, I want the maze layout and trivia questions to change each time so that the game feels fresh.
+**Acceptance Criteria:**
+- Maze is randomly generated or loaded from a set
+- Trivia pulled randomly from question bank
+
+**Atomic Tasks:**
+1. Implement random maze generator or load random layout from list
+2. Build trivia question bank using Web API
+3. Implement random question selection logic
+
+#### 9. As a player, I want to see my performance at the end so that I can track my progress.
+**Acceptance Criteria:**
+- Game end screen shows score, correct answers, skips used, and time
+
+**Atomic Tasks:**
+1. Track correct answers in game state
+2. Track skips used in game state
+3. Add end-game summary screen
+4. Display performance stats from game state
+
+### Typography
+The website uses carefully selected Google Fonts for optimal readability and thematic consistency:
+- **Primary Font**: Figtree - Modern, highly readable sans-serif for UI elements and game text
+- **Secondary Font**: Montserrat - Clean geometric typeface for headings and emphasis
+- **Thematic Font**: Cinzel - Medieval-inspired serif font for modal titles and atmospheric text
+
+### Colour Scheme
+The color palette reflects the medieval fantasy theme with natural, earthy tones:
+- **Primary Color**: `#F7EF99` (Light Yellow) - Warm, inviting tone for primary elements
+- **Secondary Color**: `#ABE188` (Light Green) - Natural accent representing growth and progress
+- **Highlight Color**: `#8B8BAE` (Purple/Lavender) - Mystical accent for special elements
+- **Accent Color**: `#F1BB87` (Warm Beige) - Earthy tone for balanced visual hierarchy
+- **Text Color**: `#5D675B` (Dark Green) - Readable dark tone maintaining natural theme
+
+## Features:
+
+### Game Mechanics
+
+#### Maze Navigation System
+- **Procedural Generation**: Recursive backtracking algorithm creates unique, solvable mazes
+- **Player Movement**: Smooth navigation using keyboard arrows, WASD, or touch controls
+- **Collision Detection**: Accurate wall detection preventing invalid movement
+- **Visual Feedback**: Clear player positioning with blue circular indicator
+- **Start/End Points**: Distinctive visual markers for maze entrance and exit
+
+#### Trivia Door System
+- **Strategic Placement**: Doors positioned throughout maze requiring knowledge to pass
+- **Question Presentation**: Bootstrap modal system displaying multiple-choice questions
+- **Answer Validation**: Immediate feedback with correct/incorrect response handling
+- **Door States**: Visual indicators for locked, unlocked, and completed doors
+- **Progress Blocking**: Failed questions prevent advancement until resolved
+
+#### Master Key Mechanism
+- **Limited Resource**: Strategic number of master keys based on difficulty setting
+- **Skip Functionality**: Bypass difficult questions while consuming valuable resources
+- **Visual Counter**: Real-time display of remaining master keys in HUD
+- **Strategic Decision**: Players must choose when to use keys vs. attempt answers
+- **Game Balance**: Prevents total blocking while maintaining challenge
 
 ### Trivia System
 
-#### Question Bank & API Integration
-- **Dynamic Content**: Trivia questions fetched via external API
-- **Categorized Pool**: Questions organized by subject categories
-- **Random Selection**: Different questions each game session for replayability
-- **User Choice**: Category selection available (difficulty permitting)
+#### API Integration
+- **[Open Trivia Database](https://opentdb.com/)**: Dynamic question fetching for varied content
+- **Category Selection**: Multiple subject areas for diverse questioning
+- **Difficulty Scaling**: Questions calibrated for engaging but fair challenge
+- **Caching System**: Efficient storage preventing repeated API calls
+- **Fallback Content**: Local question bank if API unavailable
 
-#### Question Format & Feedback
-- **Multiple Choice**: Tappable button interface for answers
-- **Immediate Response**: Instant "Correct/Incorrect" feedback
-- **Educational Value**: Correct answer highlighted when player answers incorrectly
-- **Responsive Design**: Optimized for both desktop clicks and mobile taps
+#### Question Format
+- **Multiple Choice**: Four-option format with single correct answer
+- **Immediate Feedback**: Instant response with answer validation
+- **Educational Value**: Correct answers highlighted for learning opportunities
+- **Randomization**: Shuffled options preventing pattern memorization
+- **Accessibility**: Screen reader compatible with proper ARIA labels
 
-#### Difficulty Variation
-- **Category Selection**: Users can choose preferred trivia categories (time permitting)
-- **Adaptive Questioning**: Difficulty scales with game progression
-- **Balanced Challenge**: Questions calibrated for engaging but fair gameplay
+### User Interface
 
-### Game Progress & State Management
-
-#### Score Tracking System
-- **Correct Answers**: Running count of successfully answered questions
-- **Master Key Usage**: Track number of skips used during gameplay
-- **Performance Metrics**: Comprehensive statistics for player improvement
-- **Session History**: Game-by-game progress tracking
-
-#### Game Over Conditions
-- **Victory Condition**: Successfully reaching the maze exit
-- **Failure Scenarios**: Running out of master keys while blocked by unanswered doors
-- **Retry Options**: Ability to restart with new maze layout and questions
-
-### UI/UX Design
-
-#### Responsive Layout
-- **Bootstrap Framework**: Scalable maze display using Bootstrap grid system
-- **Device Adaptation**: Automatic scaling for desktop, tablet, and mobile screens
-- **Modal System**: Bootstrap modals for trivia questions on mobile devices
-- **Touch Optimization**: Mobile-first design with appropriate touch targets
-
-#### HUD (Heads-Up Display)
-- **Master Keys Counter**: Real-time display of remaining skips
-- **Position Indicator**: Current location within the maze
-- **Score Display**: Live tracking of questions answered correctly
-- **Progress Bar**: Visual representation of maze completion percentage
+#### Heads-Up Display (HUD)
+- **Master Keys Counter**: Golden key icons showing remaining skips
+- **Score Tracking**: Correct answers and total questions attempted
+- **Progress Indicators**: Visual representation of game advancement
+- **Responsive Layout**: Adaptive positioning for different screen sizes
 
 #### Control Systems
-- **Dual Input Support**: Full keyboard and touch control implementation
-- **Accessibility**: Keyboard navigation for screen readers and motor accessibility
-- **Gesture Recognition**: Swipe controls for intuitive mobile navigation
+- **Keyboard Controls**: Arrow keys and WASD for directional movement
+- **Touch Interface**: Large, accessible buttons for mobile interaction
+- **Button Feedback**: Visual hover and active states for user feedback
+- **Accessibility Support**: Full keyboard navigation for screen readers
 
-### Replay & Randomization
+#### Modal Design
+- **Medieval Theming**: Ornate borders and atmospheric background imagery
+- **Accessible Content**: High contrast white text for improved readability
+- **Responsive Sizing**: Optimal display across all device types
+- **Clear Actions**: Distinct buttons for answers and master key usage
 
-#### Dynamic Maze Generation
+### Responsive Design
+
+#### Cross-Device Compatibility
+- **Mobile Optimization**: Touch-friendly controls and appropriate sizing
+- **Tablet Adaptation**: Balanced layout utilizing available screen space
+- **Desktop Enhancement**: Full feature set with optimal performance
+- **Consistent Experience**: Unified gameplay across all platforms
+
+#### Performance Considerations
+- **Efficient Rendering**: Optimized CSS for smooth animation and interaction
+- **Image Optimization**: Compressed assets for faster loading
+- **Responsive Images**: Appropriate sizing for different screen densities
+- **Progressive Enhancement**: Core functionality works without advanced features
+
+## Technologies Used
+
+- **HTML5**: Semantic markup for game structure and accessibility compliance
+- **CSS3**: Custom styling with CSS variables, flexbox, and grid for responsive design
+- **JavaScript ES6+**: Game logic, API integration, maze generation algorithms, and interactive functionality
+- **Bootstrap 5.3.3**: Responsive framework providing grid system, modals, and component styling
+- **Google Fonts**: Professional typography with Figtree, Montserrat, and Cinzel font families
+- **Font Awesome**: Comprehensive icon library for UI elements and visual feedback
+- **[Open Trivia DB API](https://opentdb.com/)**: External trivia question database for dynamic content
+
+### Development Tools:
+- **Visual Studio Code**: Primary development environment with extensions for productivity
+- **Chrome DevTools**: Debugging, performance analysis, and responsive design testing
+- **Git & GitHub**: Version control and repository hosting with collaborative development
+- **Live Server**: Local development server for real-time testing and iteration
+- **CSS/HTML Validators**: W3C validation tools ensuring code quality and standards compliance
+
+### Game Architecture:
+- **Modular JavaScript**: Separated game logic, UI management, and API handling
+- **Event-Driven Design**: Responsive user interaction handling with custom events
+- **State Management**: Persistent game state throughout sessions with comprehensive tracking
+- **Progressive Enhancement**: Core maze functionality independent of JavaScript features
+
+### Framework Benefits:
+- **Bootstrap Grid System**: Responsive 12-column layout for consistent design
+- **Bootstrap Components**: Pre-built modals, buttons, and navigation elements
+- **Bootstrap Utilities**: Spacing, typography, and color classes for efficient styling
+- **Mobile-First Approach**: Responsive design philosophy ensuring optimal mobile experience
+
+## Testing
+
+[Testing section will be expanded with screenshots and detailed results]
+
+### Cross-Browser Compatibility
+Testing performed across major browsers:
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+### Device Responsiveness
+Verified functionality across device categories:
+- Mobile phones (320px - 768px)
+- Tablets (768px - 1024px)
+- Laptops (1024px - 1440px)
+- Desktop monitors (1440px+)
+
+### Game Logic Testing
+- **Maze Generation**: Verified all generated mazes are solvable
+- **Trivia Integration**: Confirmed API connectivity and question display
+- **Master Key System**: Validated resource management and skip functionality
+- **Win/Lose Conditions**: Tested all game completion scenarios
+
+### Accessibility Testing
+- **Keyboard Navigation**: Full game playable without mouse
+- **Screen Reader Support**: Semantic HTML with appropriate ARIA labels
+- **Color Contrast**: Text readability across all interface elements
+- **Focus Management**: Clear visual indicators for interactive elements
+
+### Performance Optimization
+- **Load Times**: Optimized assets for fast initial rendering
+- **Smooth Animations**: 60fps performance during gameplay
+- **Memory Management**: Efficient maze generation and cleanup
+- **API Response Handling**: Graceful handling of network delays
+
+## Deployment
+
+[Deployment details will be added once live site is available]
+
+### GitHub Pages Deployment
+The game will be deployed using GitHub Pages:
+1. Repository settings configuration
+2. Branch selection for deployment
+3. Custom domain setup (if applicable)
+4. SSL certificate configuration
+
+### Local Development
+For development and testing:
+1. Open `index.html` in a web browser
+2. Use live server for optimal API testing
+3. Access developer tools for debugging
+
+## Credits
+
+### Content
+- **Game Concept**: Original puzzle-trivia hybrid design combining spatial and knowledge challenges
+- **Medieval Theme**: Inspired by fantasy gaming aesthetics and classical mythology
+- **Educational Integration**: Trivia system designed to provide learning opportunities within gameplay
+- **Accessibility Focus**: Universal design principles ensuring inclusive gaming experience
+
+### Technical Resources
+- **Bootstrap 5.3.3**: Responsive framework enabling professional UI development
+- **[Open Trivia Database](https://opentdb.com/)**: Comprehensive question bank providing diverse trivia content
+- **Google Fonts**: Professional typography enhancing readability and aesthetic appeal
+- **Font Awesome**: Icon library providing consistent visual elements
+- **Recursive Backtracking Algorithm**: Maze generation technique ensuring solvable puzzles
+
+### Images and Assets
+- **Fantasy Imagery**: Medieval-themed backgrounds and atmospheric elements
+- **UI Icons**: Custom and Font Awesome icons for interface elements
+- **Background Textures**: Atmospheric imagery supporting the fantasy theme
+- **Player Indicators**: Custom designed elements for game state visualization
+
+### Development Support
+- **GitHub Copilot**: AI-assisted coding for implementation efficiency and bug detection
+- **ChatGPT/Claude AI**: Development guidance, documentation assistance, and accessibility recommendations
+- **Code Institute**: Educational foundation and project structure guidance
+- **Open Source Community**: Libraries, frameworks, and development tools
+
+### Inspiration and Research
+- **Classic Maze Games**: Traditional puzzle games informing navigation mechanics
+- **Educational Gaming**: Research on learning through interactive entertainment
+- **Responsive Design**: Modern web development practices for cross-platform compatibility
+- **Accessibility Standards**: WCAG guidelines ensuring inclusive design
+
+### Acknowledgments
+- **Code Institute**: Educational foundation and project requirements framework
+- **GitHub Community**: Version control platform and collaborative development tools
+- **Bootstrap Team**: Responsive framework enabling rapid, professional development
+- **[Open Trivia Database](https://opentdb.com/) Maintainers**: Free API service providing educational content
+- **Accessibility Advocates**: Guidelines and testing methodologies for inclusive design
+- **Beta Testers**: Community feedback improving gameplay experience and usability
+
+---
+**Note**: This game is created for educational and entertainment purposes as part of a hackathon project. It demonstrates modern web development techniques, responsive design principles, and accessibility best practices in interactive entertainment.
 - **Unique Layouts**: Different maze configuration each playthrough
 - **Algorithmic Generation**: Procedural maze creation ensuring solvable paths
 - **Scalable Complexity**: Maze size adapts to difficulty settings
