@@ -6,7 +6,7 @@ An engaging, responsive web-based puzzle game that combines maze navigation with
 
 ![Mind Maze Wizard](assets/images/wizard.webp)
 
-![Mind Maze Game](assets/images/mind-maze3.png)
+![Mind Maze Game](assets/images/mind-maze2.png)
 
 ## 🎮 Recent Updates & Improvements
 
