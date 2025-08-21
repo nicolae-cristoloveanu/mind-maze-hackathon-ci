@@ -63,15 +63,41 @@
                     </div>
 
                     <div class="modal-body">
+                        <p>
+                            Welcome, adventurer! Your challenge is to escape the labyrinth by solving riddles of
+                            knowledge.
+                            <br>
+                            Here’s how to play!
+                        </p>
+                        <h3>🎮 Controls</h3>
                         <ul>
-                            <li>Mind Maze is a classic maze game (no trivia in this version).</li>
-                            <li>Use arrow keys or WASD to navigate through the maze.</li>
-                            <li>Use the buttons to configure game difficulty or start the game.</li>
+                            <li><strong>Desktop:</strong> Use <kbd>Arrow Keys</kbd> or on-screen buttons to move.</li>
+                            <li><strong>Mobile/Tablet:</strong> <strong>Use buttons</strong> in any direction to move.</li>
+                        </ul>
+
+                        <h3>🚪 Trivia Doors</h3>
+                        <ul>
+                            <li>Some paths are blocked by <strong>locked doors</strong>.</li>
+                            <li>Answer a <strong>trivia question</strong> to open the door.</li>
+                            <li><strong>Correct:</strong> Door opens and you pass.</li>
+                            <li><strong>Incorrect:</strong> Door stays locked (retry or use a Master Key).</li>
+                        </ul>
+
+                        <h3>🔑 Master Keys</h3>
+                        <ul>
+                            <li>You start with a limited number of <strong>Master Keys</strong>.</li>
+                            <li>Use a key to <strong>skip a question</strong> and unlock instantly.</li>
+                            <li>Plan wisely—once they’re gone, they’re gone!</li>
+                        </ul>
+
+                        <h3>⭐ Winning the Game</h3>
+                        <ul>
+                            <li>Navigate the maze and unlock doors.</li>
+                            <li>Reach the <strong>exit</strong> to complete the challenge.</li>
                         </ul>
                     </div>
-
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
                     </div>
 
                 </div>
@@ -132,7 +158,7 @@
                 <div class="modal-header border-0 text-center">
                     <h5 class="modal-title w-100" id="triviaModalLabel">
                         <i class="fas fa-question-circle me-2"></i>
-                    A challenge awaits you at this door.
+                        A challenge awaits you at this door.
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -141,7 +167,7 @@
                         <img src="assets/images/wizard.webp" alt="Wizard Guardian" class="wizard-image">
                     </div>
                     <p class="lead mb-3">
-                    Do you know the answer to this trivia question?
+                        Do you know the answer to this trivia question?
                     </p>
                     <p> Choose wisely, as your knowledge will determine
                         your path forward through the maze.</p>
@@ -160,7 +186,8 @@
                         </div>
                     </div>
                     <!-- <div class="trivia-options"></div> -->
-                    <button type="button" class="btn btn-master-key" data-bs-dismiss="modal" data-type="masterkey">Use Master
+                    <button type="button" class="btn btn-master-key" data-bs-dismiss="modal" data-type="masterkey">Use
+                        Master
                         Key</button>
                 </div>
             </div>
