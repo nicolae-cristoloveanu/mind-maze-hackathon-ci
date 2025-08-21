@@ -319,7 +319,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const modal = document.querySelector("#trivia-modal");
 
     // Update buttons in modal footer
-    const modalFooter = document.querySelector("#trivia-modal .modal-footer .trivia-options");
+    const modalFooter = document.querySelector(
+      "#trivia-modal .modal-footer .trivia-options"
+    );
     if (modalFooter) {
       const masterKeyButton = gameState.areKeysLeft()
         ? `<button type="button" class="btn" data-bs-dismiss="modal" data-type="masterkey">Use Master Key (${gameState.returnKeysLeft()} left)</button>`
@@ -513,25 +515,6 @@ document.addEventListener("DOMContentLoaded", function () {
       this.bank = [];
     },
   };
-
-  // // Use inside an async function (so await is valid)
-  // async function main() {
-  //   // Fill the bank with questions on app start
-  //   await questionBank.fetchQuestions("medium", 10);
-
-  //   // Example usage: get a question for a trivia event
-  //   let question = questionBank.retrieveRandomQuestion();
-  //   if (!question) {
-  //     // If empty, fetch again (unlikely right after filling!)
-  //     await questionBank.fetchQuestions("medium", 10);
-  //     question = questionBank.retrieveRandomQuestion();
-  //   }
-  //   // Now use question.question, question.options, question.answer in your UI or logic
-  //   console.log("Random question chosen:", question);
-  // }
-
-  // Call main on page load
-  // main();
 
   // Game state object
   const gameState = {
