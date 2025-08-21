@@ -85,7 +85,7 @@ h3 {
 }
 
 p {
-    font-size: 1rem;
+    /* font-size: 1rem; */
     line-height: 1.6;
     margin-bottom: 1rem;
 }
@@ -210,7 +210,7 @@ p {
 
 /* Intro section */
 #intro>.container {
-    height: 60%;
+    height: 80%;
     width: 90%;
     display: flex;
     justify-content: center;
@@ -220,6 +220,10 @@ p {
 #intro .row {
     height: 100%;
     width: 100%;
+}
+
+#intro-hero {
+    background: url(../images/wizard.webp) no-repeat center/contain;
 }
 
 #intro-hero,
@@ -244,6 +248,7 @@ p {
 
 #intro-buttons>button {
     width: 40%;
+    margin: 1rem 0;
 }
 
 #intro-buttons>button:first-child {
@@ -587,6 +592,9 @@ p {
 /* Media queries */
 /* Extra small devices */
 @media screen and (min-width:768px) {
+    body{
+        font-size: 1rem;
+    }
 
     #intro-buttons>button,
     #game-settings {
@@ -612,6 +620,9 @@ p {
 
 /* Large Devices (desktops, 992px and larger) */
 @media screen and (min-width:992px) {
+    h2{
+        font-size: 2rem;
+    }
     #game-controls .btn[data-direction="ArrowLeft"] {
         left: 36%;
     }
@@ -644,6 +655,9 @@ p {
 
 /* Extra large devices (larger than 1400px) */
 @media screen and (min-width:1400px) {
+    body {
+        font-size: 1.3rem;
+    }
     #game-controls .btn[data-direction="ArrowLeft"] {
         left: 37%;
     }
