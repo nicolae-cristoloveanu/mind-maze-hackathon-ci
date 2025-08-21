@@ -152,7 +152,6 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: blue; */
 }
 
 .player {
@@ -363,143 +362,6 @@ p {
     flex-direction: column;
 }
 
-/* Navbar */
-#navbar {
-    background-color: var(--fable-primary-color);
-    position: sticky;
-    top: 0;
-    z-index: 1030;
-    /* Ensures navbar stays above other content */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow for depth when scrolling */
-}
-
-#navbar .logo {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    padding: 0.5rem;
-}
-
-#navbar .nav-link {
-    color: var(--fable-text-color) !important;
-    font-size: 1.3rem;
-    font-weight: 500;
-    padding: 0.75rem 1rem;
-    transition: color 0.3s ease;
-}
-
-#navbar .nav-link:hover {
-    color: var(--highlight-color) !important;
-}
-
-#navbar .nav-link.active {
-    color: var(--highlight-color-light) !important;
-    font-weight: 600;
-}
-
-#navbar .navbar-brand {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--fable-text-color);
-}
-
-#navbar .navbar-toggler {
-    border-color: var(--fable-text-color);
-}
-
-/* Footer Styles */
-
-.site-footer {
-    margin: 2rem auto;
-    padding: 3rem 1.5rem;
-    max-width: 90%;
-    border: 1px solid var(--border-light-cyan);
-    border-radius: 1.5rem;
-    position: relative;
-    /* Direct background image application similar to header */
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    font-family: var(--secondary-font);
-    color: rgba(255, 255, 255, 0.9);
-    /* Light text for readability over dark background */
-}
-
-.site-footer h5 {
-    font-family: var(--primary-font);
-    font-weight: 700;
-    color: #ffffff;
-    /* White headings for contrast against background */
-    margin-bottom: 1.5rem;
-}
-
-.site-footer p {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.9);
-    /* Light text for readability */
-}
-
-.site-footer .footer-links {
-    list-style: none;
-    padding-left: 0;
-}
-
-.site-footer .footer-links li {
-    margin-bottom: 0.75rem;
-}
-
-.site-footer .footer-links a {
-    color: rgba(255, 255, 255, 0.8);
-    /* Light links for readability */
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.site-footer .footer-links a:hover {
-    color: var(--primary-color);
-    /* Light cyan on hover for contrast */
-}
-
-.site-footer .social-icons a {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    margin-right: 0.5rem;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    /* Semi-transparent background */
-    color: #ffffff;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.site-footer .social-icons a:hover {
-    background-color: var(--primary-color);
-    /* Light cyan background on hover */
-    color: var(--text-color);
-}
-
-.site-footer .copyright-text {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    /* Light border for separation */
-    padding-top: 2rem;
-    margin-top: 2rem;
-    font-size: 0.9rem;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.7);
-    /* Subtle light text for copyright */
-}
-
 /* Modal Styles - Testing */
 .modal-content {
     border-radius: 1rem;
@@ -567,7 +429,6 @@ p {
 .modal-footer .btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(139, 139, 174, 0.4);
-    /* background: linear-gradient(135deg, var(--highlight-color-light) 0%, var(--highlight-color) 100%); */
     background: var(--fable-btn-hover-bg);
 }
 
