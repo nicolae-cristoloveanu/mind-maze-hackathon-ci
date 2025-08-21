@@ -651,14 +651,7 @@ p {
     letter-spacing: 2px;
     margin: 0;
     position: relative;
-}
-
-.fable-theme #section-heading h2::before,
-.fable-theme #section-heading h2::after {
-    content: '⚜';
-    color: #daa520;
-    margin: 0 15px;
-    font-size: 0.8em;
+    text-align: center;
 }
 
 /* Maze area with ornate border */
