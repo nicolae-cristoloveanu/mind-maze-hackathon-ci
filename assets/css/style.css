@@ -302,10 +302,6 @@ p {
     height: 50%;
 }
 
-/* #maze-area {
-    width: calc(1 * attr(data-maze-size) * var(--maze-cell-width));
-} */
-
 #game-controls {
     height: 22%;
     margin: 0.5rem 0;
