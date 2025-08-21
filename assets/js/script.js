@@ -700,6 +700,10 @@ document.addEventListener("DOMContentLoaded", function () {
       if (button.hasAttribute("data-bs-dismiss")) {
         if (button.getAttribute("id") == "tutorial-close") {
           document.querySelector("button[data-type='game-start']").focus();
+        } else if (
+          button.getAttribute("data-type") === "new-game"
+        ) {
+          document.querySelector("button[data-type='game-start']").focus();
         } else {
           const btn = document.querySelector(
             "button[data-direction='ArrowUp']"
@@ -715,8 +719,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const modals = document.querySelectorAll(".modal");
   modals.forEach((modal) => {
     modal.addEventListener("hide.bs.modal", function () {
-        const btn = document.querySelector("button[data-direction='ArrowUp']");
-        btn.focus();
+      const btn = document.querySelector("button[data-direction='ArrowUp']");
+      btn.focus();
     });
   });
 
