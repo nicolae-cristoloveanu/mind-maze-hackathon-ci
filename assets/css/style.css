@@ -210,7 +210,7 @@ p {
 
 /* Intro section */
 #intro>.container {
-    height: 60%;
+    height: 80%;
     width: 90%;
     display: flex;
     justify-content: center;
@@ -244,6 +244,7 @@ p {
 
 #intro-buttons>button {
     width: 40%;
+    margin: 1rem 0;
 }
 
 #intro-buttons>button:first-child {
