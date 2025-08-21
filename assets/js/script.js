@@ -375,6 +375,9 @@ function gameStart(gameState) {
   const numKeys = gameState.gameLevel.numKeys;
 
   gameState.reset();
+  gameState.questionBank.fetchQuestions(gameState.gameLevel.level, gameState.gameLevel.numTrivia);
+  console.log(`DEBUG: Question Bank=>`,gameState.questionBank);
+
   // Add maze dimension as style property to HTML element
   // CSS then uses this to responsively scale the maze cell width depending
   // on viewport width and height
@@ -465,26 +468,29 @@ document.addEventListener("DOMContentLoaded", function () {
       const idx = Math.floor(Math.random() * this.bank.length);
       return this.bank.splice(idx, 1)[0];
     },
+    reset:function (){
+      this.bank = [];
+    },
   };
 
-  // Use inside an async function (so await is valid)
-  async function main() {
-    // Fill the bank with questions on app start
-    await questionBank.fetchQuestions("medium", 10);
+  // // Use inside an async function (so await is valid)
+  // async function main() {
+  //   // Fill the bank with questions on app start
+  //   await questionBank.fetchQuestions("medium", 10);
 
-    // Example usage: get a question for a trivia event
-    let question = questionBank.retrieveRandomQuestion();
-    if (!question) {
-      // If empty, fetch again (unlikely right after filling!)
-      await questionBank.fetchQuestions("medium", 10);
-      question = questionBank.retrieveRandomQuestion();
-    }
-    // Now use question.question, question.options, question.answer in your UI or logic
-    console.log("Random question chosen:", question);
-  }
+  //   // Example usage: get a question for a trivia event
+  //   let question = questionBank.retrieveRandomQuestion();
+  //   if (!question) {
+  //     // If empty, fetch again (unlikely right after filling!)
+  //     await questionBank.fetchQuestions("medium", 10);
+  //     question = questionBank.retrieveRandomQuestion();
+  //   }
+  //   // Now use question.question, question.options, question.answer in your UI or logic
+  //   console.log("Random question chosen:", question);
+  // }
 
   // Call main on page load
-  main();
+  // main();
 
   // Game state object
   const gameState = {
@@ -496,6 +502,7 @@ document.addEventListener("DOMContentLoaded", function () {
     numQuestions: 0,
     numCorrect: 0,
     numSkipped: 0,
+    questionBank: "",
     initializeKeys: function (keys) {
       this.totalKeysAvailable = keys;
       this.numMasterKeys = keys;
@@ -508,6 +515,7 @@ document.addEventListener("DOMContentLoaded", function () {
       this.numQuestions = 0;
       this.numCorrect = 0;
       this.numSkipped = 0;
+      this.questionBank.reset();
     },
     useMasterKey: function () {
       if (this.numMasterKeys > 0) {
@@ -544,6 +552,9 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   };
 
+  // Assign question bank to gameState
+  gameState.questionBank = questionBank;
+
   // Custom Event object to trigger trivia to unlock door
   const checkKeyEvent = new CustomEvent("checkKey", {
     detail: {
@@ -552,7 +563,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 
-  gameStart(gameState);
+  // gameStart(gameState);
 
   // Add event listener for Key presses
   document.addEventListener("keydown", (event) => {
