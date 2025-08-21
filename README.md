@@ -2,6 +2,15 @@
 
 An engaging, responsive web-based puzzle game that combines maze navigation with trivia challenges, creating a unique blend of spatial reasoning and knowledge-based gameplay for players of all skill levels.
 
+## 👥 Development Team
+
+This project was developed collaboratively by:
+
+- **[@sthDINESH](https://github.com/sthDINESH)** - Project Lead
+- **[@Ray786719](https://github.com/Ray786719)** - Collaborator
+- **[@HafsaA85](https://github.com/HafsaA85)** - Collaborator
+- **[@nicolae-cristoloveanu](https://github.com/nicolae-cristoloveanu)** - Collaborator
+
 **Live Site:** [https://nicolae-cristoloveanu.github.io/mind-maze-hackathon-ci/](https://nicolae-cristoloveanu.github.io/mind-maze-hackathon-ci/)
 
 ![Mind Maze Wizard](assets/images/wizard.webp)
@@ -64,7 +73,27 @@ Mind Maze is an interactive web-based puzzle game that challenges players to nav
 
 The game interface was designed with wireframes to establish optimal user experience across different device sizes:
 
-[Wireframe screenshots will be added here]
+#### Desktop Wireframes
+
+![Desktop Wireframe 1](assets/images/wireframe-desktop1.png)
+*Game start screen and main menu layout*
+
+![Desktop Wireframe 2](assets/images/wireframe-desktop2.png)
+*Maze gameplay interface with HUD elements*
+
+![Desktop Wireframe 3](assets/images/wireframe-desktop3.png)
+*Trivia modal and question display system*
+
+#### Mobile Wireframes
+
+![Mobile Wireframe 1](assets/images/wireframe-mobile1.png)
+*Mobile start screen and navigation*
+
+![Mobile Wireframe 2](assets/images/wireframe-mobile2.png)
+*Mobile maze interface with touch controls*
+
+![Mobile Wireframe 3](assets/images/wireframe-mobile3.png)
+*Mobile trivia modal and responsive design*
 
 #### Desktop Layout
 - **Game Area**: Central maze display with surrounding HUD elements
