@@ -347,6 +347,18 @@ Testing performed across major browsers:
 - Safari (latest)
 - Edge (latest)
 
+### HTML Validation
+The HTML code has been validated using the W3C Nu HTML Checker to ensure compliance with web standards:
+
+![W3C HTML Validator Results](assets/images/nu-html-checker.png)
+*W3C Nu HTML Checker validation results showing clean, standards-compliant HTML markup*
+
+**Validation Results:**
+- **No Errors**: All HTML markup passes W3C validation standards
+- **Semantic Structure**: Proper use of HTML5 semantic elements
+- **Accessibility Compliance**: Valid markup supporting screen readers and assistive technologies
+- **Standards Adherence**: Code follows modern web development best practices
+
 ### Device Responsiveness
 Verified functionality across device categories:
 - Mobile phones (320px - 768px)
@@ -371,6 +383,32 @@ Verified functionality across device categories:
 - **Smooth Animations**: 60fps performance during gameplay
 - **Memory Management**: Efficient maze generation and cleanup
 - **API Response Handling**: Graceful handling of network delays
+
+### Lighthouse Performance Testing
+
+The game has been thoroughly tested using Google Lighthouse to ensure optimal performance, accessibility, best practices, and SEO scores across different scenarios:
+
+#### Desktop Performance Results
+![Lighthouse Desktop Results](assets/images/lighthouse1.png)
+*Desktop Lighthouse scores showing excellent performance metrics*
+
+#### Mobile Performance Results
+![Lighthouse Mobile Results](assets/images/lighthouse2.png)
+*Mobile Lighthouse scores demonstrating responsive optimization*
+
+#### Accessibility & Best Practices
+![Lighthouse Accessibility Results](assets/images/lighthouse3.png)
+*Accessibility and best practices scores highlighting inclusive design*
+
+#### SEO & Progressive Web App Features
+![Lighthouse SEO Results](assets/images/lighthouse4.png)
+*SEO optimization and PWA readiness scores*
+
+**Key Performance Metrics:**
+- **Performance**: Optimized loading times and smooth gameplay experience
+- **Accessibility**: High contrast ratios, semantic HTML, and keyboard navigation support
+- **Best Practices**: Modern web standards, security protocols, and efficient resource usage
+- **SEO**: Proper meta tags, structured content, and search engine optimization
 
 ## Deployment
 
@@ -409,11 +447,12 @@ For development and testing:
 - **UI Icons**: Custom and Font Awesome icons for interface elements
 - **Background Textures**: Atmospheric imagery supporting the fantasy theme
 - **Player Indicators**: Custom designed elements for game state visualization
+- **Google Images**: Non-licensable images sourced from Google for visual content and design elements
 
 ### Development Support
+- **Code Institute**: Educational guidance, leadership, and content foundation for project development
 - **GitHub Copilot**: AI-assisted coding for implementation efficiency and bug detection
 - **ChatGPT/Claude AI**: Development guidance, documentation assistance, and accessibility recommendations
-- **Code Institute**: Educational foundation and project structure guidance
 - **Open Source Community**: Libraries, frameworks, and development tools
 
 ### Inspiration and Research
