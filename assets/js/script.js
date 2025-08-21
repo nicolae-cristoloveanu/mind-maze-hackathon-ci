@@ -698,8 +698,14 @@ document.addEventListener("DOMContentLoaded", function () {
       // Add event listeners to remove focus for bootstrap modals triggered
       // programmatically
       if (button.hasAttribute("data-bs-dismiss")) {
-        const btn = document.querySelector("button[data-direction='ArrowUp']");
-        btn.focus();
+        if (button.getAttribute("id") == "tutorial-close") {
+          document.querySelector("button[data-type='game-start']").focus();
+        } else {
+          const btn = document.querySelector(
+            "button[data-direction='ArrowUp']"
+          );
+          btn.focus();
+        }
       }
     });
   });
@@ -709,8 +715,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const modals = document.querySelectorAll(".modal");
   modals.forEach((modal) => {
     modal.addEventListener("hide.bs.modal", function () {
-      const btn = document.querySelector("button[data-direction='ArrowUp']");
-      btn.focus();
+        const btn = document.querySelector("button[data-direction='ArrowUp']");
+        btn.focus();
     });
   });
 
